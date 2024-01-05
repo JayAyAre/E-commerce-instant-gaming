@@ -5,7 +5,7 @@
 <html>
 <head>
 <title>Sign Up</title>
-<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.tailwindcss.com/?plugins=forms"></script>
 <script>
     tailwind.config = {
       theme: {
@@ -13,6 +13,9 @@
           colors: {
             'main-gray-light': '#323232',
             'main-gray-dark': '#272727',
+            'main-gray-input': '#242424',
+            'main-gray-medium': '#6d6d6d',
+            'main-orange': '#ff5400',
             'main-orange-dark': '#FF4120',
             'main-orange-light': '#FF7F00'
           }
@@ -29,77 +32,50 @@
           crossorigin="anonymous"/>
 </head>
 <body>
-    <h1 class="text-main-orange-dark font-bold text-3xlfont-bold ">
-        Hello world!
-    </h1>
-    <img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="Logo de Garlic Games">
-    <div class="container">
-		<div class="col-md-offset-2 col-md-7">
-			<h2 class="text-center">Skeleton Structure for Homework 2</h2>
-			<div class="panel panel-info">
-				<div class="panel-heading">
-					<div class="panel-title">Sign Up</div>
-				</div>
-				<div class="panel-body">
-					<form action="${mvc.uri('sign-up')}" class="form-horizontal" method="POST">
-                                                <input type="hidden" name="${mvc.csrf.name}" value="${mvc.csrf.token}"/>
-						<div class="form-group">
-							<label for="firstname" class="col-md-3 control-label">First
-								Name</label>
-							<div class="col-md-9">
-                                                            <input type="text" name="firstName" value="${user.firstName}" class="form-control" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="lastname" class="col-md-3 control-label">Last
-								Name</label>
-							<div class="col-md-9">
-                                                            <input type="text" name="lastName" value="${user.lastName}" class="form-control" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="email" class="col-md-3 control-label">Email</label>
-							<div class="col-md-9">
-                                                            <input type="text" name="email" value="${user.email}" class="form-control" />
-							</div>
-						</div>
-						<div class="form-group">
-							<!-- Button -->
-							<div class="col-md-offset-3 col-md-9">
-								<input type="submit" value="Submit" />
-							</div>
-						</div>
-					</form>
-                                        <c:if test="${not empty message}">
-                                            <div class="alert alert-danger" role="alert">
-                                                ${message}        
-                                            </div>
-                                        </c:if>
-                                        <c:if test="${attempts.hasExceededMaxAttempts()}">
-                                            <div id="too-many-signup-attempts" class="modal top fade" role="alert" tabindex="-1" data-mdb-backdrop="static" data-mdb-keyboard="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h2 class="modal-title" id="too-many-signup-attempts">Please try again later.</h2>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="alert alert-danger" role="alert">
-                                                                   <img class="mb-4" src="<c:url value="/resources/img/Invalid.png" />" alt="" width="134" height="92" />
-                                                                        The maximum number of sign up attempts has been exceeded!
-                                                                </div>
-                                                             </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <script>
-                                                $("#too-many-signup-attempts").modal('show');
-                                            </script>
-                                        </c:if>
-                                        <jsp:include page="/WEB-INF/views/layout/alert.jsp" />
-                                </div>
-			</div>
-		</div>
-	</div>
-        <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
+    <div class="flex flex-row">
+        <div class="flex flex-col flex-1 w-full h-screen justify-center content-center bg-main-gray-light">
+            <img class="w-56 h-56 mx-auto" src="${pageContext.request.contextPath}/resources/img/logo.png" alt="Logo de Garlic Games">
+            <form action="${mvc.uri('sign-up')}" class="mx-auto w-3/4" method="POST"> 
+                <input type="hidden" name="${mvc.csrf.name}" value="${mvc.csrf.token}"/>
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
+                    <div class="sm:col-span-3">
+                      <div>
+                        <input type="text" name="firstName" value="${user.firstName}" placeholder="Name"
+                               class="block bg-main-gray-input w-full rounded-md border-0 py-3.5 text-white shadow-sm ring-2 ring-inset ring-main-gray-medium placeholder:text-gray-400 transition-colors hover:ring-2 hover:ring-inset hover:ring-main-orange focus:ring-2 focus:ring-inset focus:ring-main-orange sm:text-sm sm:leading-6">
+                      </div>
+                    </div>
+
+                    <div class="sm:col-span-3">
+                      <div>
+                          <input id="password" name="password" type="password" placeholder="Your password"
+                               class="block bg-main-gray-input w-full rounded-md border-0 py-3.5 text-white shadow-sm ring-2 ring-inset ring-main-gray-medium placeholder:text-gray-400 transition-colors hover:ring-2 hover:ring-inset hover:ring-main-orange focus:ring-2 focus:ring-inset focus:ring-main-orange sm:text-sm sm:leading-6">
+                      </div>
+                    </div>
+                    
+                    <div class="sm:col-span-6">
+                      <div>
+                        <input id="email" name="email" type="email" value="${user.email}" placeholder="Your e-mail"
+                               class="block bg-main-gray-input w-full rounded-md border-0 py-3.5 text-white shadow-sm ring-2 ring-inset ring-main-gray-medium placeholder:text-gray-400 transition-colors hover:ring-2 hover:ring-inset hover:ring-main-orange focus:ring-2 focus:ring-inset focus:ring-main-orange sm:text-sm sm:leading-6">
+                      </div>
+                    </div>
+                </div>
+                <c:if test="${not empty errors}">
+                    <div class="bg-[#512C37] rounded rounded-md mt-6 px-24 py-8">
+                        <ul>
+                            <c:forEach var="error" items="${errors.getErrors()}">
+                                <li class='text-[#F00D4C]'><c:out value="${error.message}"/></li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                </c:if>
+                <input class="bg-gradient-to-r from-main-orange-light to-main-orange-dark hover:from-main-orange-dark hover:to-main-orange-dark cursor-pointer w-full text-white font-semibold py-3 px-4 mt-6 rounded-lg shadow"
+                type="submit"
+                value="Submit"/>
+            </form>
+        </div>
+        <div class="flex-1 w-full bg-cover bg-center" style="background-image: url('${pageContext.request.contextPath}/resources/img/registro.jpg')">
+        </div>
+    </div>
+    <!-- <jsp:include page="/WEB-INF/views/layout/footer.jsp" /> -->
 </body>
 </html>
