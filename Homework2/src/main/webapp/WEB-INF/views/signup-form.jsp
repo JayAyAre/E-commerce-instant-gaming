@@ -40,7 +40,7 @@
                 <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
                     <div class="sm:col-span-3">
                       <div>
-                        <input type="text" name="firstName" value="${user.firstName}" placeholder="Name"
+                        <input type="text" name="username" value="${user.username}" placeholder="Username"
                                class="block bg-main-gray-input w-full rounded-md border-0 py-3.5 text-white shadow-sm ring-2 ring-inset ring-main-gray-medium placeholder:text-gray-400 transition-colors hover:ring-2 hover:ring-inset hover:ring-main-orange focus:ring-2 focus:ring-inset focus:ring-main-orange sm:text-sm sm:leading-6">
                       </div>
                     </div>
@@ -59,9 +59,12 @@
                       </div>
                     </div>
                 </div>
-                <c:if test="${not empty errors}">
+                <c:if test="${not empty errors or not empty message}">
                     <div class="bg-[#512C37] rounded rounded-md mt-6 px-24 py-8">
                         <ul>
+                            <c:if test="${not empty message}">
+                                <li class='text-[#F00D4C]'><c:out value="${message}"/></li>
+                                </c:if>
                             <c:forEach var="error" items="${errors.getErrors()}">
                                 <li class='text-[#F00D4C]'><c:out value="${error.message}"/></li>
                             </c:forEach>

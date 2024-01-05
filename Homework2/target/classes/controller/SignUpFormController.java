@@ -17,6 +17,11 @@ import jakarta.ws.rs.BeanParam;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.core.Context;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
+
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,17 +35,22 @@ public class SignUpFormController {
     @Inject UserService service;
     @Inject Models models;
     @Inject AlertMessage flashMessage;
-    @Inject SignUpAttempts attempts;
     
     @GET
-    public String showForm() {
+    public String showForm(@Context HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        System.out.println("amiga" + session.getAttribute("username"));
+        if (session != null && session.getAttribute("username") != null) {
+            return "signup-success.jsp";
+        }
+
         return "signup-form.jsp"; // Injects CRSF token
     }    
     
     @POST
     @UriRef("sign-up")
     @CsrfProtected
-    public String signUp(@Valid @BeanParam UserForm userForm) {
+    public String signUp(@Valid @BeanParam UserForm userForm, @Context HttpServletRequest request) {
         models.put("user", userForm);
         if (bindingResult.isFailed()) {
             AlertMessage alert = AlertMessage.danger("Validation failed!");
@@ -53,22 +63,18 @@ public class SignUpFormController {
             models.put("errors", alert);
             return "signup-form.jsp";
         }
-        
-        if(attempts.hasExceededMaxAttempts()) {
-            return "signup-form.jsp";
-        }
        
         User user = service.findUserByEmail(userForm.getEmail());
         if (user != null) {
-            // Try again
             log.log(Level.WARNING, "A user with this e-mail address {0} already exists.", userForm.getEmail());
+            HttpSession session = request.getSession(true);
+            session.setAttribute("username", userForm.getUsername());
             models.put("message", "A user with this e-mail address already exists!");
-            attempts.increment();
             return "signup-form.jsp";
         }
         log.log(Level.INFO, "Redirecting to the success page.");
+        
         service.addUser(userForm);
-        attempts.reset();
         return "signup-success.jsp";
     } 
 }
