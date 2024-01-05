@@ -5,9 +5,6 @@
 <html>
 <head>
 <title>Sign Up</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" />
-<script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />"></script>
-<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
 <!-- FontAwesome -->
