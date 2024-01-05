@@ -5,6 +5,7 @@
 <html>
 <head>
 <title>Sign Up</title>
+<script src="https://cdn.tailwindcss.com"></script>
 <script>
     tailwind.config = {
       theme: {
@@ -17,9 +18,8 @@
           }
         }
       }
-    }
+    };
 </script>
-<script src="https://cdn.tailwindcss.com"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
 <!-- FontAwesome -->
@@ -29,7 +29,7 @@
           crossorigin="anonymous"/>
 </head>
 <body>
-    <h1 class="text-3xl font-bold text-main-orange-dark">
+    <h1 class="text-main-orange-dark font-bold text-3xlfont-bold ">
         Hello world!
     </h1>
 	<div class="container">
