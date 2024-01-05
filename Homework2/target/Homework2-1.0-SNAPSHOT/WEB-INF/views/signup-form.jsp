@@ -5,6 +5,21 @@
 <html>
 <head>
 <title>Sign Up</title>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'main-gray-light': '#323232',
+            'main-gray-dark': '#272727',
+            'main-orange-dark': '#FF4120',
+            'main-orange-light': '#FF7F00'
+          }
+        }
+      }
+    }
+</script>
+<script src="https://cdn.tailwindcss.com"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
 <!-- FontAwesome -->
@@ -14,6 +29,9 @@
           crossorigin="anonymous"/>
 </head>
 <body>
+    <h1 class="text-3xl font-bold text-main-orange-dark">
+        Hello world!
+    </h1>
 	<div class="container">
 		<div class="col-md-offset-2 col-md-7">
 			<h2 class="text-center">Skeleton Structure for Homework 2</h2>
