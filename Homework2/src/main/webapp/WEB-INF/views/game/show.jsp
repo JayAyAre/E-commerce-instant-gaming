@@ -10,42 +10,39 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>JSP Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+            tailwind.config = {
+              theme: {
+                extend: {
+                  colors: {
+                    'main-gray-light': '#323232',
+                    'main-gray-dark': '#272727',
+                    'main-orange-dark': '#FF4120',
+                    'main-orange-light': '#FF7F00',
+                  }
+                }
+              }
+            }
+    </script>
 </head>
 <body>
 <%--        <jsp:include page="/WEB-INF/views/layout/navbar.jsp" />--%>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Contact info</div>
-                <div class="card-body">
-                    <div class="d-flex justify-content-center">
-                        <img class="profile_picture" src="{{Storage::url($contact->profile_picture)}}">
-                    </div>
-                    <p>Name: {{ $contact->name }}</p>
-                    <p>Phone:<a class="text-decoration-none text-light" href="tel:{{ $contact->phone_number }}"> {{ $contact->phone_number }}</a></p>
-                    <p>Email:<a class="text-decoration-none text-light" href="mailto:{{ $contact->email }}"> {{ $contact->email }}</a></p>
-                    <p>Age: {{ $contact->age }}</p>
-                    <a>Created at: {{ $contact->created_at }}<br></a>
-                    <a><br>Updated at: {{ $contact->updated_at }}<br></a>
-                    @
-                    <div class="d-flex justify-content-center">
-                        <a href="${mvc.uri("add-cart")}" class="btn btn-secondary me-2">Add cart</a>
-                        <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
-                            Button
-                        </button>
-                        <form action="{{route(" contacts.destroy
-                        ",$contact->id)}}" method="POST">
-                        <button type="submit" class="btn btn-danger">Delete contact</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+<div class="flex flex-col sm:flex-row gap-4">
+    <div class="w-1/2 border border-1 border-gray-300 rounded-lg">
+        A
+    </div>
+    <div class="w-1/2 border border-1 border-gray-300 mt-4 sm:mt-0 rounded-lg">
+        <button class=" bg-gradient-to-r from-main-orange-light to-main-orange-dark text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                onclick="location.href='https://www.google.com'" type="button"> Add to cart
+            <!-- $mvc.uri('cart')} -->
+        </button>
     </div>
 </div>
-@endsection
-<h1>Hello World!</h1>
+
+
+
 <jsp:include page="/WEB-INF/views/layout/footer.jsp"/>
 </body>
 </html>
