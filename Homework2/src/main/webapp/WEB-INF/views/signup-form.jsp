@@ -32,7 +32,8 @@
     <h1 class="text-main-orange-dark font-bold text-3xlfont-bold ">
         Hello world!
     </h1>
-	<div class="container">
+    <img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="Logo de Garlic Games">
+    <div class="container">
 		<div class="col-md-offset-2 col-md-7">
 			<h2 class="text-center">Skeleton Structure for Homework 2</h2>
 			<div class="panel panel-info">
