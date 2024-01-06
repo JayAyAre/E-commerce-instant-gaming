@@ -4,7 +4,9 @@
     Author     : Usuario
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,22 +28,39 @@
             }
     </script>
 </head>
-<body>
+<body class="bg-main-gray-light">
 <%--        <jsp:include page="/WEB-INF/views/layout/navbar.jsp" />--%>
 
-<div class="flex flex-col sm:flex-row gap-4">
-    <div class="w-1/2 border border-1 border-gray-300 rounded-lg">
-        A
+<div class="flex flex-col sm:flex-row gap-4 m-8">
+    <div class="flex justify-center w-1/2 border rounded-lg bg-white">
+        <img class="" src="${pageContext.request.contextPath}/resources/img/game.png" alt="Game image">
     </div>
-    <div class="w-1/2 border border-1 border-gray-300 mt-4 sm:mt-0 rounded-lg">
-        <button class=" bg-gradient-to-r from-main-orange-light to-main-orange-dark text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+    
+    <div class="flex justify-center w-1/2 border border-2 border-gray-500 mt-4 sm:mt-0 rounded-lg">
+        <div class="flex-row">
+            <div class="name">${game.getName()}</div>
+            <div class="stock">${game.getStock()}</div>
+            <div class="types">
+                <c:forEach var="type" items="${types}">
+                    <div class="type-name">${type}</div>
+                </c:forEach>
+            </div>
+
+
+
+        </div>
+
+        <div class="addToCart">
+            <button class="my-auto bg-gradient-to-r from-main-orange-light to-main-orange-dark text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
                 onclick="location.href='https://www.google.com'" type="button"> Add to cart
-            <!-- $mvc.uri('cart')} -->
-        </button>
+            </button>
+        </div>
+        
     </div>
 </div>
 
 
+            <!-- $mvc.uri('cart')} -->
 
 <jsp:include page="/WEB-INF/views/layout/footer.jsp"/>
 </body>
