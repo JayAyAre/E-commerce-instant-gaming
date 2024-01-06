@@ -1,0 +1,53 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package deim.urv.cat.homework2.model;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+
+/**
+ *
+ * @author edgar
+ */
+public class Console implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private Long id;
+    private String name;
+    private Collection<Game> games;
+    
+    public Console(){
+        games = new ArrayList<Game>();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Collection<Game> getGames() {
+        return games;
+    }
+
+    public void setGames(Collection<Game> games) {
+        this.games = games;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+}

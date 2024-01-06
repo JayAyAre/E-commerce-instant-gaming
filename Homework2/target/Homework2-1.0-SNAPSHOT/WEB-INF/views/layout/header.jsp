@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <style>
-    .gradient-text {
+    .gradient{
+        color: white;
+    }
+    .gradient:hover {
         background-image: linear-gradient(to bottom, #FF4120, #FF7F00);
         -webkit-background-clip: text;
         background-clip: text;
@@ -9,35 +14,24 @@
         display: inline-block;
     }
 </style>
-<footer class="w-full bg-main-black">
-    <div class="flex flex-row justify-between w-2/3 mx-auto py-10">
-        <div class='flex flex-row gap-6'>
-            <i class="fa fa-fighter-jet gradient-text text-5xl" aria-hidden="true"></i>
-            <div class="flex flex-col gap-1 text-white justify-center">
-                <h2 class='font-bold text-xl'>Super fast</h2>
-                <p class="text-sm text-[#999999]">Instant digital download</p>
+<header class="sticky top-0">
+    <div class="w-full bg-main-black flex flex-row justify-between pl-4 pr-8 bg-opacity-95">
+        <img class="w-24 h-24" src="${pageContext.request.contextPath}/resources/img/logo.png" alt="Logo de Garlic Games">
+        <div class="flex flex-row text-white items-center gap-4">
+            <c:forEach var="console" items="${consoles}">
+                <a class="cursor-pointer gradient">${console.name}</a>
+            </c:forEach>
+            <div class="group flex justify-center items-cente r cursor-pointer">
+                <div class="group bg-gradient-to-b from-main-orange-dark to-main-orange-light rounded-full p-5 inline-flex justify-center items-center"> <!-- Fondo circular naranja -->
+                    <i class="fa fa-search scale-125 text-white transition-transform duration-300 group-hover:scale-150" aria-hidden="true"></i> <!-- Icono con efecto de crecimiento en hover -->
+                </div>
             </div>
+
         </div>
-        <div class='flex flex-row gap-6'>
-            <i class="fa fa-shield gradient-text text-5xl" aria-hidden="true"></i>
-            <div class="flex flex-col gap-1 text-white justify-center">
-                <h2 class='font-bold text-xl'>Reliable & safe</h2>
-                <p class="text-sm text-[#999999]">Verified sellers</p>
-            </div>
-        </div>
-        <div class='flex flex-row gap-6'>
-            <i class="fa fa-commenting-o gradient-text text-5xl" aria-hidden="true"></i>
-            <div class="flex flex-col gap-1 text-white justify-center">
-                <h2 class='font-bold text-xl'>Customer support</h2>
-                <p class="text-sm text-[#999999]">Human support 24/7</p>
-            </div>
-        </div>
-        <div class='flex flex-row gap-6'>
-            <i class="fa fa-money gradient-text text-5xl" aria-hidden="true"></i>
-            <div class="flex flex-col gap-1 text-white justify-center">
-                <h2 class='font-bold text-xl'>Best price guaranteed</h2>
-                <p class="text-sm text-[#999999]">If you find a better price, contact us!</p>
-            </div>
+        <div class="flex flex-row text-white items-center gap-6 text-3xl">
+            <i class="fa fa-shopping-cart gradient cursor-pointer" aria-hidden="true"></i>
+            <i class="fa fa-user-circle-o gradient cursor-pointer" aria-hidden="true"></i>
         </div>
     </div>
-</footer>
+</header>
+
