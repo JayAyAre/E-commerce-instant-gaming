@@ -35,7 +35,6 @@ public class GameDetailsController {
     @GET
     @Path("{id}")
     public String GameDetails(@PathParam("id") String id) {
-        
         Game game = gameService.findGame(id);
         Console console = consoleService.findConsole(game.getConsoleId());
         Collection<GameType> types = typeService.findGameTypes((List<Long>) game.getTypeIds());
