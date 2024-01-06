@@ -36,6 +36,7 @@ public class GameDetailsController {
     @Path("{id}")
     public String GameDetails(@PathParam("id") String id) {
         Game game = gameService.findGame(id);
+        Collection<Console> consoles = consoleService.getAllConsoles();
         Console console = consoleService.findConsole(game.getConsoleId());
         Collection<GameType> types = typeService.findGameTypes((List<Long>) game.getTypeIds());
         System.out.println(game);
@@ -45,7 +46,7 @@ public class GameDetailsController {
             for (GameType type : types) {
                 typeNames[i++] = type.getName();
             }
-            
+            models.put("consoles", consoles);
             models.put("game", game);
             models.put("console", console);
             models.put("types", typeNames);

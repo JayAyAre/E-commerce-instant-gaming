@@ -65,7 +65,7 @@
         </div>
     </div>
         
-    <div class='flex left-0 sm:mx-auto flex-col items-center mt-8 text-[#8A8A8A] '>
+    <div class='flex flex-col items-center mt-8 lg:flex-row gap-16 sm:mx-auto sm:max-w-5xl relative text-[#8A8A8A]'>
         <p class="mb-2">Stock: ${game.getDescription()}</p>
     </div>
     <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
