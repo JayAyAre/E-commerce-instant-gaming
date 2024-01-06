@@ -39,7 +39,7 @@ public class ShowGameController {
         Game game = gameService.findGame(id);
         Console console = consoleService.findConsole(game.getConsoleId());
         Collection<GameType> types = typeService.findGameTypes((List<Long>) game.getTypeIds());
-
+        System.out.println(game);
         if(game != null && console != null && types != null){
             String[] typeNames = new String[types.size()];
             int i = 0;

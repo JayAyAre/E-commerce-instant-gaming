@@ -4,7 +4,6 @@
  */
 package deim.urv.cat.homework2.model;
 
-
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -29,7 +28,18 @@ public class Game implements Serializable {
     private Collection<GameType> types;
     private Collection<Long> typeIds;
     private Collection<Long> rentals;
+    
+    private long image;
 
+    // Getter y Setter para el campo image
+    public long getImage() {
+        return image;
+    }
+
+    public void setImage(long image) {
+        this.image = image; 
+    }
+    
     public Collection<Long> getRentals() {
         return rentals;
     }
@@ -123,7 +133,7 @@ public class Game implements Serializable {
 
     @Override
     public String toString() {
-        return "Game{" + "id=" + id + ", name=" + name + ", console=" + console + ", consoleId=" + consoleId + ", types=" + types + ", typeIds=" + typeIds + '}';
+        return "Game{" + "id=" + id + ", name=" + name + ", image=" + image + '}';
     }
    
 }
