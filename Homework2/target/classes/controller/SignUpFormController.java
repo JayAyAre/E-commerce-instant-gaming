@@ -39,7 +39,6 @@ public class SignUpFormController {
     @GET
     public String showForm(@Context HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        System.out.println("amiga" + session.getAttribute("username"));
         if (session != null && session.getAttribute("username") != null) {
             return "signup-success.jsp";
         }
@@ -67,13 +66,12 @@ public class SignUpFormController {
         User user = service.findUserByEmail(userForm.getEmail());
         if (user != null) {
             log.log(Level.WARNING, "A user with this e-mail address {0} already exists.", userForm.getEmail());
-            HttpSession session = request.getSession(true);
-            session.setAttribute("username", userForm.getUsername());
             models.put("message", "A user with this e-mail address already exists!");
             return "signup-form.jsp";
         }
         log.log(Level.INFO, "Redirecting to the success page.");
-        
+        HttpSession session = request.getSession(true);
+        session.setAttribute("username", userForm.getUsername());
         service.addUser(userForm);
         return "signup-success.jsp";
     } 

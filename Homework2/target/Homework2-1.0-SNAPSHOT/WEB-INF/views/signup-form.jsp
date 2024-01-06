@@ -75,6 +75,9 @@
                 type="submit"
                 value="Submit"/>
             </form>
+            <a href="sign-in" class="mx-auto w-3/4 mt-4 text-main-gray-medium underline cursor-pointer hover:text-white">
+                Already have an account?
+            </a>
         </div>
         <div class="flex-1 w-full bg-cover bg-center" style="background-image: url('${pageContext.request.contextPath}/resources/img/registro.jpg')">
         </div>

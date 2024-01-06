@@ -1,24 +1,15 @@
 package deim.urv.cat.homework2.model;
 
 public class User {
-    private String firstName;
-    private String lastName;
+    private String username;
     private String email;
 
-    public String getFirstName() {
-        return fixNull(this.firstName);
+    public String getUsername() {
+        return username;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return fixNull(this.lastName);
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {

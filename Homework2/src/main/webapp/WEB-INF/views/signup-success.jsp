@@ -26,11 +26,11 @@
                         </p>
 			<table class="table table-striped table-bordered">
 				<tr>
-					<td><b>First Name </b>: ${user.username}</td>
+					<td><b>First Name </b>: ${sessionScope.authUser.username}</td>
 				</tr>
 				
 				<tr>
-					<td><b>Email </b>: ${user.email}</td>
+					<td><b>Email </b>: ${sessionScope.authUser.email}</td>
 				</tr>
 			</table>
                         <a class="btn btn-sm btn-info text-white" href="<c:url value="/Web/SignUp" />">Go Back</a>
