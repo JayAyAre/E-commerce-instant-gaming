@@ -49,5 +49,4 @@ public class Address implements Serializable {
                ", state: " + getState() +
                ", zip: " + getZip();
     }
-
 }

@@ -7,6 +7,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 
+
 /**
  *
  * @author Usuario
@@ -44,3 +45,4 @@ public class ConsoleService {
         return null;
     }
 }
+

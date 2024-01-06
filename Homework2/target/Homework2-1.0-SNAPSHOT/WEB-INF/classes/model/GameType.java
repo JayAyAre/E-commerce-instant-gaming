@@ -59,3 +59,4 @@ public class GameType implements Serializable {
         return "GameType{" + "id=" + id + ", name=" + name + '}';
     }
 }
+

@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
-@Path("ShowGame")
+@Path("game")
 public class ShowGameController {
     @Inject BindingResult bindingResult;
     @Inject Logger log;

@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
-@Path("ShowGame")
-public class ShowGameController {
+@Path("game-details")
+public class GameDetailsController {
     @Inject BindingResult bindingResult;
     @Inject Logger log;
     @Inject GameService gameService;
@@ -34,7 +34,7 @@ public class ShowGameController {
 
     @GET
     @Path("{id}")
-    public String showGame(@PathParam("id") String id) {
+    public String GameDetails(@PathParam("id") String id) {
         
         Game game = gameService.findGame(id);
         Console console = consoleService.findConsole(game.getConsoleId());
