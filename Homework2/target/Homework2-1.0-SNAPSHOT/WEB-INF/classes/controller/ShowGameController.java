@@ -35,7 +35,8 @@ public class ShowGameController {
     @GET
     @Path("{id}")
     public String showGame(@PathParam("id") String id) {
-        
+        Collection<Console> consoles = consoleService.getAllConsoles();
+        models.put("consoles", consoles);
         Game game = gameService.findGame(id);
         Console console = consoleService.findConsole(game.getConsoleId());
         Collection<GameType> types = typeService.findGameTypes((List<Long>) game.getTypeIds());

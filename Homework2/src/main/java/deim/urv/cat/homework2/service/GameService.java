@@ -1,9 +1,12 @@
 package deim.urv.cat.homework2.service;
 
+import deim.urv.cat.homework2.model.Console;
 import deim.urv.cat.homework2.model.Game;
 import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.MediaType;
+import java.util.List;
 
 /**
  *
@@ -25,6 +28,15 @@ public class GameService {
                 .get();
         if (response.getStatus() == 200) {
             return response.readEntity(Game.class);
+        }
+        return null;
+    }
+    
+    public List<Game> getAllgames(String id){
+        Response response = webTarget.request(MediaType.APPLICATION_JSON)
+                .get();
+        if (response.getStatus() == 200) {
+            return response.readEntity(new GenericType<List<Game>>() {});
         }
         return null;
     }

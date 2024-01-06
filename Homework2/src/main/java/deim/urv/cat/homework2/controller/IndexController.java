@@ -42,7 +42,6 @@ public class IndexController {
     @GET
     public String showIndex(@Context HttpServletRequest request) {
         Collection<Console> consoles = service.getAllConsoles();
-        System.out.println(consoles.size());
         models.put("consoles", consoles); 
         return "index.jsp";
     }    

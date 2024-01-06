@@ -51,3 +51,4 @@ public class Console implements Serializable {
         return name;
     }
 }
+
