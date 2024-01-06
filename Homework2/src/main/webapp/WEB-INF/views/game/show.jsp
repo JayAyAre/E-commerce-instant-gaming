@@ -21,45 +21,41 @@
         }
     </script>
 </head>
-<body class="bg-main-gray-light">
-    <div class="relative">
-        <div class="hidden sm:flex h-30vh">
-            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat">
-                <img class="w-11/12 h-full mx-auto object-cover" src="${pageContext.request.contextPath}/resources/img/${game.getImage()}.jpg" alt="Game image">
-            </div>
-        </div>
+<body class="bg-[#272727]">
+    <div class="relative hidden sm:block z-0 h-56 md:h-72 lg:h-96 xl:h-[25rem] bg-center xl:bg-cover" style="background-image: url('${pageContext.request.contextPath}/resources/img/banner.jpg')">
+        <div class="absolute bottom-0 left-0 w-full h-16" style="background-image: linear-gradient(to top right, #272727 50%, transparent 50%);"></div>
+    </div>
 
-        <div class="flex flex-col sm:flex-row gap-4 m-8 relative z-10">
-            <!-- Resto del contenido -->
-            <div class="flex justify-center w-full sm:w-1/2 border border-0 rounded-lg">
-                <img class="w-full h-auto" src="${pageContext.request.contextPath}/resources/img/${game.getImage()}.jpg" alt="Game image">
-            </div>
-            
-            <div class="w-full sm:w-1/2 border border-0 rounded-lg p-6 text-white mt-4 sm:mt-0 bg-transparent sm:bg-gray-dark" style="backdrop-filter: blur(15px);">
-                <div class="flex flex-col">
-                    <h2 class="text-2xl font-semibold mb-4">${game.getName()}</h2>
-                    <p class="mb-2">${game.getStock()}</p>
+        
+    <div class="flex flex-col items-center sm:-mt-48 lg:flex-row gap-16 sm:mx-auto sm:max-w-5xl relative">
+        <!-- Resto del contenido -->
+        <img class="rounded-lg sm:w-1/2" src="${pageContext.request.contextPath}/resources/img/${game.getImage()}.jpg" alt="Game image">
+      
 
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold mb-2">Game Types:</h3>
-                        <div class="flex flex-wrap">
-                            <c:forEach var="type" items="${types}">
-                                <span class="mr-2 mb-2 bg-gray-700 px-2 py-1 rounded-md text-white">${type}</span>
-                            </c:forEach>
-                        </div>
-                    </div>
+        <div class="w-full sm:w-1/2 border border-0 rounded-lg p-6 text-white mt-4 sm:mt-0 bg-transparent sm:bg-gray-dark" style="backdrop-filter: blur(35px);">
+            <div class="flex flex-col">
+                <h2 class="text-2xl font-semibold mb-4">${game.getName()}</h2>
+                <p class="mb-2">Stock: ${game.getStock()}</p>
 
-                    <div class="mt-8">
-                        <button class="bg-gradient-to-r from-main-orange-light to-main-orange-dark text-white font-semibold py-2 px-4 border rounded border-0 shadow" onclick="location.href='https://www.google.com'" type="button"> Add to cart </button>
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold mb-2">Genres:</h3>
+                    <div class="flex flex-wrap">
+                        <c:forEach var="type" items="${types}">
+                            <span class="mr-2 mb-2 bg-gray-700 px-2 py-1 rounded-md text-white">${type}</span>
+                        </c:forEach>
                     </div>
                 </div>
-            </div>
 
+                <div class="mt-8">
+                    <button class="bg-gradient-to-r from-main-orange-light to-main-orange-dark text-white font-semibold py-2 px-4 border rounded border-0 shadow" onclick="location.href='https://www.google.com'" type="button"> Add to cart </button>
+                </div>
+            </div>
         </div>
     </div>
-<div> 
-    <jsp:include page="/WEB-INF/views/layout/footer.jsp"/>
-</div>
+        
+    <div class='flex left-0 sm:mx-auto flex-col items-center mt-8 text-[#8A8A8A] '>
+        <p class="mb-2">Stock: ${game.getDescription()}</p>
+    </div>
       
 </body>
 </html>
