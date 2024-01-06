@@ -135,5 +135,5 @@ public class Game implements Serializable {
     public String toString() {
         return "Game{" + "id=" + id + ", name=" + name + ", image=" + image + '}';
     }
-   
 }
+
