@@ -6,6 +6,7 @@ package deim.urv.cat.homework2.model;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Objects;
 
 
 /**
@@ -130,7 +131,20 @@ public class Game implements Serializable {
     public void setTypes(Collection<GameType> types) {
         this.types = types;
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Game other = (Game) obj;
+        return Objects.equals(id, other.id);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+    
     @Override
     public String toString() {
         return "Game{" + "id=" + id + ", name=" + name + ", image=" + image + '}';

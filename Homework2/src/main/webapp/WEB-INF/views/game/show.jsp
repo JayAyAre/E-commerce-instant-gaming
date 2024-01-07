@@ -34,20 +34,20 @@
 </head>
 <body class="bg-[#272727]">
     <jsp:include page="/WEB-INF/views/layout/header.jsp" />
-    <div class="relative hidden sm:block z-0 h-56 md:h-72 lg:h-96 xl:h-[25rem] bg-center xl:bg-cover" style="background-image: url('${pageContext.request.contextPath}/resources/img/banner.jpg')">
+    <div class="relative hidden sm:block z-0 h-56 md:h-72 lg:h-96 xl:h-[25rem] bg-center xl:bg-cover" style="background-image: url('${pageContext.request.contextPath}/resources/img/banner2.png')">
         <div class="absolute bottom-0 left-0 w-full h-16" style="background-image: linear-gradient(to top right, #272727 50%, transparent 50%);"></div>
     </div>
 
         
-    <div class="flex flex-col items-center sm:-mt-48 lg:flex-row gap-16 sm:mx-auto sm:max-w-5xl relative">
+    <div class="flex flex-col items-center sm:-mt-48 lg:flex-row gap-4 sm:gap-16 mx-[2rem] sm:mx-auto sm:max-w-5xl relative">
         <!-- Resto del contenido -->
         <img class="rounded-lg sm:w-1/2" src="${pageContext.request.contextPath}/resources/img/${game.getImage()}.jpg" alt="Game image">
       
 
-        <div class="w-full sm:w-1/2 border border-0 rounded-lg p-6 text-white mt-4 sm:mt-0 bg-transparent sm:bg-gray-dark" style="backdrop-filter: blur(35px);">
+        <div class="w-full h-full sm:w-1/2 border border-0 rounded-lg p-10 text-white mt-4 sm:mt-0 sm:bg-transparent" style="backdrop-filter: blur(35px);">
             <div class="flex flex-col">
-                <h2 class="text-2xl font-semibold mb-4">${game.getName()}</h2>
-                <p class="mb-2">Stock: ${game.getStock()}</p>
+                <h2 class="text-2xl font-semibold mb-4">${game.name}</h2>
+                <p class="mb-2">Stock: ${game.stock}</p>
 
                 <div class="mb-4">
                     <h3 class="text-lg font-semibold mb-2">Genres:</h3>
@@ -58,16 +58,20 @@
                     </div>
                 </div>
 
-                <div class="mt-8">
-                    <button class="bg-gradient-to-r from-main-orange-light to-main-orange-dark text-white font-semibold py-2 px-4 border rounded border-0 shadow" onclick="location.href='https://www.google.com'" type="button"> Add to cart </button>
-                </div>
+                <form action="/Homework2/Web/cart" method="post">
+                    <input class ="gameId" type="hidden" name="gameId" value="${game.id}">
+                    <button class="bg-gradient-to-r from-main-orange-light to-main-orange-dark text-white font-semibold py-2 px-4 border rounded border-0 shadow" type="submit"> Add to cart </button>
+                </form>
             </div>
         </div>
     </div>
         
-    <div class='flex flex-col items-center mt-8 lg:flex-row gap-16 sm:mx-auto sm:max-w-5xl relative text-[#8A8A8A]'>
-        <p class="mb-2">Stock: ${game.getDescription()}</p>
+    <div class='flex flex-col items-center mt-8 lg:flex-row gap-16 mx-auto max-w-5xl relative text-[#8A8A8A]'>
+        <p class="mb-2">${game.getDescription()}</p>
     </div>
-    <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
+   
+    <div class='flex flex-col items-center '>
+        <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
+    </div>     
 </body>
 </html>
