@@ -44,12 +44,7 @@ public class IndexController {
     
     @GET
     public String showIndex(@Context HttpServletRequest request) {
-<<<<<<< Updated upstream
-        Collection<Console> consoles = service.getAllConsoles();
-        System.out.println(consoles.size());
-=======
         Collection<Console> consoles = consoleService.getAllConsoles();
->>>>>>> Stashed changes
         models.put("consoles", consoles); 
         Collection<Game> games = gameService.getAllgames();
         models.put("games", games); 
