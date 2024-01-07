@@ -9,7 +9,7 @@
         display: inline-block;
     }
 </style>
-<footer class="fixed bottom-0 w-full">
+<footer class="relative w-full">
     <div class="w-full bg-main-black">
         <div class="flex flex-row justify-between w-2/3 mx-auto py-10">
             <div class='flex flex-row gap-6'>

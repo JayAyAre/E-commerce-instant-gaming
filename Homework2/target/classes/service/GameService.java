@@ -6,6 +6,7 @@ import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.MediaType;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -32,12 +33,38 @@ public class GameService {
         return null;
     }
     
-    public List<Game> getAllgames(String id){
-        Response response = webTarget.request(MediaType.APPLICATION_JSON)
+    public int countGames(){
+        String gameCount = webTarget.path("count")
+                .request(MediaType.TEXT_PLAIN)
+                .get(String.class);
+        return Integer.parseInt(gameCount);
+    }
+    
+    public List<Game> getAllgames(int page, int pageSize, int consoleId, List<Long> gameTypeIds){
+        Response response = buildQuery(consoleId, gameTypeIds)
+                .queryParam("page", page)
+                .queryParam("pageSize", pageSize)
+                .request(MediaType.APPLICATION_JSON)
                 .get();
         if (response.getStatus() == 200) {
             return response.readEntity(new GenericType<List<Game>>() {});
         }
         return null;
+    }
+    
+    private WebTarget buildQuery(int consoleId, List<Long> gameTypeIds){
+        WebTarget queryTarget = webTarget;
+
+        if (consoleId > 0) {
+            queryTarget = queryTarget.queryParam("console", consoleId);
+        }
+
+        if (gameTypeIds != null && !gameTypeIds.isEmpty()) {
+            for (Long typeId : gameTypeIds) {
+                queryTarget = queryTarget.queryParam("types", typeId);
+            }
+        }
+
+        return queryTarget;
     }
 }
