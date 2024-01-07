@@ -2,12 +2,10 @@ package deim.urv.cat.homework2.controller;
 
 import deim.urv.cat.homework2.model.AlertMessage;
 import deim.urv.cat.homework2.model.Console;
-import deim.urv.cat.homework2.model.Game;
 import deim.urv.cat.homework2.model.SignUpAttempts;
 import deim.urv.cat.homework2.service.UserService;
 import deim.urv.cat.homework2.model.User;
 import deim.urv.cat.homework2.service.ConsoleService;
-import deim.urv.cat.homework2.service.GameService;
 
 import jakarta.inject.Inject;
 import jakarta.mvc.Controller;
@@ -38,16 +36,13 @@ import java.util.logging.Logger;
 public class IndexController {    
     // CDI
     @Inject Logger log;
-    @Inject ConsoleService consoleService;
-    @Inject GameService gameService;
+    @Inject ConsoleService service;
     @Inject Models models;
     
     @GET
     public String showIndex(@Context HttpServletRequest request) {
-        Collection<Console> consoles = consoleService.getAllConsoles();
+        Collection<Console> consoles = service.getAllConsoles();
         models.put("consoles", consoles); 
-        Collection<Game> games = gameService.getAllgames();
-        models.put("games", games); 
         return "index.jsp";
     }    
  

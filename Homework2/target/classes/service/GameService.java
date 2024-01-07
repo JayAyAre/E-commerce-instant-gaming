@@ -32,7 +32,7 @@ public class GameService {
         return null;
     }
     
-    public List<Game> getAllgames(){
+    public List<Game> getAllgames(String id){
         Response response = webTarget.request(MediaType.APPLICATION_JSON)
                 .get();
         if (response.getStatus() == 200) {
