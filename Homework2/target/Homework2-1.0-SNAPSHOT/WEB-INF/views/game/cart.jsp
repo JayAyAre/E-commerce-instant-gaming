@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" 
          pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,38 +34,50 @@
           crossorigin="anonymous"/>
 </head>
 <body class="bg-[#272727]">
-    <div class="z-10">
-        <jsp:include page="/WEB-INF/views/layout/header.jsp" />
-    </div>
+
 
     <div class="flex flex-col lg:flex-row gap-4 sm:gap-16 mx-[2rem] sm:mx-auto sm:max-w-5xl relative z-1">
-        <div class="flex flex-col sm:flex-row gap-4 sm:w-full mt-12">
-            <div class="sm:w-full text-main-gray-medium bg-main-gray-light p-6 rounded-xl">
+        <div class="flex flex-col sm:flex-row gap-4 mt-12">
+            <div class="flex flex-col lg:w-auto text-main-gray-medium bg-main-gray-light p-6 rounded-2xl">
                 <h2 class="text-3xl font-semibold mb-4 text-white">Shopping Cart</h2>
                 <c:if test="${not empty sessionScope.cart.games}">
+                    <c:set var="total" value="0.0" scope="page" />
                     <c:forEach var="item" items="${sessionScope.cart.games}">
-                        <div class="border border-0 rounded-lg p-6 text-white mt-4 bg-gray-dark" style="backdrop-filter: blur(35px);">
-                            <div class="flex flex-row gap-4">
-                                <img class="w-2/6 object-cover object-center rounded-lg" src="${pageContext.request.contextPath}/resources/img/${item.id}.jpg" alt="Game image">
-                                <div class="flex flex-col gap-2">
-                                    <h3 class="text-xl font-semibold">${item.name}</h3>
-                                    <p class="">Stock: ${item.stock}</p>
-                                    <p class="text-3xl font-bold">${item.price}0$</p>
+                        <div class="border border-0 rounded-lg text-white bg-gray-dark" style="backdrop-filter: blur(35px);">
+                            <div class="flex flex-col sm:flex-row gap-8">
+                                <img class="flex flex-col w-full sm:flex-row w-4/6 sm:w-3/6 object-cover object-center rounded-xl" src="${pageContext.request.contextPath}/resources/img/${item.id}.jpg" alt="Game image">
+                                <div class="flex flex-col w-full sm:flex-col">
+                                    <h3 class="text-xl font-semibold ">${item.name}</h3>
+                                    <p class="text-base text-gray-300 mt-2">Stock: ${item.stock}</p>
+                                    <p class="text-base text-gray-300 mb-2">Console: 
+                                        <c:forEach var="console" items="${consoles}">
+                                            <c:if test="${item.consoleId eq console.getId()}">
+                                                ${console.getName()}
+                                            </c:if>
+                                        </c:forEach>
+                                    </p>
+                                    <div class="flex flex-row mt-auto">
+                                        <p class="text-3xl font-bold"><fmt:formatNumber value="${item.price}" pattern="0.00"/>$</p>    
+                                        <i class="fa fa-trash-o ml-auto sm:my-auto text-3xl cursor-pointer hover:text-white text-[#999999]" aria-hidden="true" onclick="location.href='${pageContext.request.contextPath}/Web/cart/${item.id}'" type="button"></i>
+                                    </div>
+                                    <c:set var="total" value="${total + item.price}" scope="page" />
                                 </div>
-                            <i class="fa fa-trash-o ml-auto my-auto text-3xl cursor-pointer hover:text-white text-[#999999]" aria-hidden="true" onclick="location.href='${pageContext.request.contextPath}/Web/cart/${item.id}'" type="button"></i>
                             </div>
+                            <div class="w-full h-1 bg-[#474747] my-8 "></div>
                         </div>
                     </c:forEach>
                 </c:if>
                 <c:if test="${empty sessionScope.cart.games}">
                     <p>Your cart is empty.</p>
                 </c:if>
-            </div>       
+            </div>      
             <div class="sm:w-1/3 text-main-gray-medium">
                 <div class="border border-0 rounded-xl p-6 text-white bg-main-gray-light" style="backdrop-filter: blur(35px);">
-                    <h2 class="text-3xl font-semibold mb-4">Info</h2>
-                    <!-- Puedes agregar información adicional aquí, como el precio total, etc. -->
-                    <button class="bg-gradient-to-r from-main-orange-light to-main-orange-dark text-white font-semibold py-2 px-4 border rounded border-0 shadow" onclick="location.href='https://www.google.com'" type="button">Proceed to rent</button>
+                    <h2 class="text-3xl font-semibold mb-4">Total: <fmt:formatNumber value="${total}" pattern="0.00"/>$</h2>
+                    <form action="/Homework2/Web/history" method="post">
+                        <input class="total" type="hidden" name="total" value="${total}">
+                        <button class="bg-gradient-to-r from-main-orange-light to-main-orange-dark text-white font-semibold py-2 px-4 border rounded border-0 shadow" type="submit">Proceed to rent</button>
+                    </form>   
                 </div>
             </div>
         </div>

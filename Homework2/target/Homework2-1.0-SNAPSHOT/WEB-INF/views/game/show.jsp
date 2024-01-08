@@ -48,7 +48,7 @@
             <div class="flex flex-col">
                 <h2 class="text-2xl font-semibold mb-4">${game.name}</h2>
                 <p class="mb-2">Stock: ${game.stock}</p>
-
+                <p class="mb-2">Console: ${console.name}</p>
                 <div class="mb-4">
                     <h3 class="text-lg font-semibold mb-2">Genres:</h3>
                     <div class="flex flex-wrap">
@@ -58,10 +58,18 @@
                     </div>
                 </div>
 
-                <form action="/Homework2/Web/cart" method="post">
-                    <input class ="gameId" type="hidden" name="gameId" value="${game.id}">
-                    <button class="bg-gradient-to-r from-main-orange-light to-main-orange-dark text-white font-semibold py-2 px-4 border rounded border-0 shadow" type="submit"> Add to cart </button>
-                </form>
+                <c:choose>
+                    <c:when test="${game.stock > 0}">              
+                        <form action="/Homework2/Web/cart" method="post">
+                            <input class="gameId" type="hidden" name="gameId" value="${game.id}">
+                            <button class="bg-gradient-to-r from-main-orange-light to-main-orange-dark text-white font-semibold py-2 px-4 border rounded border-0 shadow" type="submit"> Add to cart </button>
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <button class="bg-gray-500 text-white font-semibold py-2 px-4 border rounded border-0 shadow cursor-not-allowed" disabled>Out of stock</button>
+                    </c:otherwise>
+                </c:choose>
+                    
             </div>
         </div>
     </div>

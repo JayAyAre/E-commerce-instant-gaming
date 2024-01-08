@@ -23,14 +23,10 @@ import java.util.logging.Logger;
 @Controller
 @Path("game-details")
 public class GameDetailsController {
-    @Inject BindingResult bindingResult;
-    @Inject Logger log;
     @Inject GameService gameService;
     @Inject ConsoleService consoleService;
     @Inject GameTypeService typeService;
     @Inject Models models;
-    @Inject AlertMessage flashMessage;
-    @Inject SignUpAttempts attempts;
 
     @GET
     @Path("{id}")
@@ -39,7 +35,10 @@ public class GameDetailsController {
         Collection<Console> consoles = consoleService.getAllConsoles();
         Console console = consoleService.findConsole(game.getConsoleId());
         Collection<GameType> types = typeService.findGameTypes((List<Long>) game.getTypeIds());
-        if(game != null && console != null && types != null){
+        
+        if(game == null || console == null || types == null || Long.parseLong(id) < 1 || id.isEmpty()){
+            return "redirect:/shop";
+        }else{
             String[] typeNames = new String[types.size()];
             int i = 0;
             for (GameType type : types) {
@@ -50,8 +49,6 @@ public class GameDetailsController {
             models.put("console", console);
             models.put("types", typeNames);
             return "game/show.jsp";
-        }else{
-            return "error404.jsp";
         }
     }
 }

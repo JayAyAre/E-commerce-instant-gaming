@@ -18,8 +18,8 @@ public class Cart {
         games.add(game);
     }
 
-    public void removeGame(Game game) {
-        games.remove(game);
+    public void removeGame(Long gameId) {
+        games.removeIf(game -> game.getId() == gameId);
     }
 
     public void clearCart() {

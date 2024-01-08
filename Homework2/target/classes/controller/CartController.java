@@ -4,7 +4,6 @@
  */
 package deim.urv.cat.homework2.controller;
 
-import deim.urv.cat.homework2.model.Game;
 import deim.urv.cat.homework2.model.Cart;
 import deim.urv.cat.homework2.model.Console;
 import deim.urv.cat.homework2.service.ConsoleService;
@@ -16,12 +15,10 @@ import jakarta.mvc.Models;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.Context;
 import java.io.IOException;
 import java.util.Collection;
@@ -40,8 +37,8 @@ public class CartController {
     @Inject Models models;
 
     @GET
-    public String viewCart(@Context HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession(true);
+    public String viewCart(@Context HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
         Collection<Console> consoles = consoleService.getAllConsoles();
         models.put("consoles", consoles);
         if (session != null) {
@@ -56,9 +53,11 @@ public class CartController {
 
     @POST
     public String addToCart(@Context HttpServletRequest request) {
-        
         String gameId = request.getParameter("gameId");
-        HttpSession session = request.getSession(true);
+        if(Long.parseLong(gameId) < 1){
+             return "error404.jsp";
+        }
+        HttpSession session = request.getSession(false);
         Cart cart = (Cart) session.getAttribute("cart");
         
         if (cart == null) {
@@ -67,6 +66,7 @@ public class CartController {
         }
 
         cart.addGame(gameService.findGame(gameId));
+        session.setAttribute("cart", cart);
 
         Collection<Console> consoles = consoleService.getAllConsoles();
         models.put("consoles", consoles);
@@ -84,8 +84,9 @@ public class CartController {
             cart = new Cart();
             session.setAttribute("cart", cart);
         }
-
-        cart.removeGame(gameService.findGame(String.valueOf(id)));
+        
+        cart.removeGame(id);
+        session.setAttribute("cart", cart);
 
         Collection<Console> consoles = consoleService.getAllConsoles();
         models.put("consoles", consoles);
