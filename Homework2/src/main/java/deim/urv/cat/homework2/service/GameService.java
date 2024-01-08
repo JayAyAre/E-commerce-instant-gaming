@@ -35,7 +35,6 @@ public class GameService {
     
     public int countGames(Long consoleId, List<Long> gameTypeIds){
         
-        System.out.println("Estoy en serviciooo");
         String gameCount = buildQuery(consoleId, gameTypeIds)
                 .path("count")
                 .request(MediaType.TEXT_PLAIN)

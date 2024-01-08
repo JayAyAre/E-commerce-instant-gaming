@@ -62,12 +62,9 @@ public class IndexController {
         models.put("consoles", consoles);
         Collection<GameType> gameTypes = gameTypeService.getAllGameTypes();
         models.put("gameTypes", gameTypes);
-        System.out.println("cabronmierdas: "+consoleId);
-        System.out.println("cabronmierdas: "+consoles);
         
         boolean consoleParameter = consoles.stream()
         .anyMatch(console -> console.getId().equals(consoleId));
-        System.out.println("cabronmierdas: "+consoleParameter);
 
         if (!consoleParameter && consoleId!=null) {
             System.out.println("Entro:");
@@ -101,8 +98,8 @@ public class IndexController {
     @GET
     @Path("remove-gametype")
     public String removeGameType(@QueryParam("console") Long consoleId,
-                                 @QueryParam("gameType") List<Long> gameTypeIds,
-                                 @QueryParam("gameTypeToRemove") Long gameTypeToRemove) {
+                                 @QueryParam("gameTypes") List<Long> gameTypeIds,
+                                 @QueryParam("gameType") Long gameTypeToRemove) {
 
         UriBuilder uriBuilder = UriBuilder.fromPath("/shop");
 

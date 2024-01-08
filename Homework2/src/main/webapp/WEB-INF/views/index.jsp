@@ -38,7 +38,7 @@
         <div class="absolute bottom-0 left-0 w-full h-16" style="background-image: linear-gradient(to top right, #272727 50%, transparent 50%);"></div>
     </div>
         
-    <div class="flex flex-row justify-center gap-6">
+    <div class="flex flex-row justify-center gap-6 mt-6">
         <div class="relative flex flex-col w-2/12">
             <div class="dropdown-toggle-consoles block bg-main-gray-input rounded-md border-0 py-4 cursor-pointer text-white shadow-sm ring-2 ring-inset ring-main-gray-medium placeholder:text-gray-400 transition-colors hover:ring-2 hover:ring-inset hover:ring-main-orange focus:ring-2 focus:ring-inset focus:ring-main-orange sm:text-sm sm:leading-6">
                 <div class="flex flex-row justify-between items-center mx-4">
@@ -93,16 +93,17 @@
                         <c:when test="${not empty param.gameType}">
                             <div class="flex justify-start items-center gap-4">
                             <c:forEach var="gameTypeId" items="${paramValues.gameType}">
-                                <form action="remove-gametype">
+                                <form action="shop/remove-gametype">
                                     <div class="flex items-center gap-1">
                                         <button type="submit"><i class="fa fa-times cursor-pointer hover:text-main-orange-light" aria-hidden="true"></i></button>
+                                        <input type="hidden" name="gameType" value="${gameTypeId}" />
                                         <span>${gameTypes.stream()
                                             .filter(gameType -> gameType.getId().equals(Long.parseLong(gameTypeId)))
                                             .findFirst()
                                             .orElse(null).name}</span>
                                         <c:if test="${not empty paramValues.gameType}">
                                             <c:forEach var="gameTypeId" items="${paramValues.gameType}">
-                                                <input type="hidden" name="gameType" value="${gameTypeId}" />
+                                                <input type="hidden" name="gameTypes" value="${gameTypeId}" />
                                             </c:forEach>
                                         </c:if>
                                         <c:if test="${not empty param.console}">
@@ -151,7 +152,14 @@
         </div>
     </div>
     <div class="mx-auto px-8 w-2/3 text-white mb-8">  
-        <h2 class="font-bold text-3xl mb-8">Tendencies</h2>
+        <c:choose>
+            <c:when test="${sessionScope.authUser != null}">
+                <h2 class="font-bold text-3xl my-8">Recomendations for ${sessionScope.authUser.username}</h2>
+            </c:when>
+            <c:otherwise>
+                 <h2 class="font-bold text-3xl my-8">Tendencies</h2>
+            </c:otherwise>
+        </c:choose> 
         <div class="grid grid-cols-3 gap-8">
             <c:forEach var="game" items="${games}">
                 <div>

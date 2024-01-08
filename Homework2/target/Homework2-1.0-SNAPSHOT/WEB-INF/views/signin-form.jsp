@@ -67,7 +67,7 @@
                 type="submit"
                 value="Submit"/>
             </form>
-            <a href="SignUp" class="mx-auto w-3/4 mt-4 text-main-gray-medium underline cursor-pointer hover:text-white">
+            <a href="sign-up" class="mx-auto w-3/4 mt-4 text-main-gray-medium underline cursor-pointer hover:text-white">
                 Create an account
             </a>
         </div>
