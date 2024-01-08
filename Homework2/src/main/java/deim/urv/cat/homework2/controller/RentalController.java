@@ -37,9 +37,7 @@ import java.util.List;
 @Controller
 @Path("history")
 public class RentalController {
-    @Inject GameService gameService;
     @Inject ConsoleService consoleService;
-    @Inject GameTypeService typeService;
     @Inject RentalService rentalService;
     @Inject Models models;
 
@@ -63,13 +61,14 @@ public class RentalController {
         games = cart.getGames();
 
 
-        User customer = (User)session.getAttribute("authUser");
+        User user = (User) session.getAttribute("authUser");
                 
         if(user==null){
             response.sendRedirect(request.getContextPath() + "error");
         }
         
         Customer customer = new Customer();
+        customer.setId(user.getId());
         customer.setEmail(user.getEmail());
         customer.setName(user.getUsername());
         
@@ -81,7 +80,7 @@ public class RentalController {
         }
         
         Rental newRental = new Rental();
-        newRental.setCustomerId("5");
+        newRental.setCustomerId(customer.getId());
         newRental.setPrice(Long.parseLong(total));
         newRental.setGameId(gamesId);
         Date startDate = new Date();
