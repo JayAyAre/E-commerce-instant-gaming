@@ -1,6 +1,7 @@
 package deim.urv.cat.homework2.model;
 
 public class User {
+    private Long id;
     private String username;
     private String email;
 
@@ -20,7 +21,20 @@ public class User {
         this.email = email;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     private String fixNull(String in) {
         return (in == null) ? "" : in;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", username=" + username + ", email=" + email + '}';
     }
 }

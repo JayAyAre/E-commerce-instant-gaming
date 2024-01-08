@@ -1,5 +1,9 @@
 deim/urv/cat/homework2/controller/SignUpFormController.class
+<<<<<<< Updated upstream
 utilities/SecurityUtil.class
+=======
+deim/urv/cat/homework2/service/RentalService.class
+>>>>>>> Stashed changes
 deim/urv/cat/homework2/controller/IndexController.class
 deim/urv/cat/homework2/controller/SignInFormController.class
 deim/urv/cat/homework2/model/Customer.class
@@ -14,6 +18,11 @@ deim/urv/cat/homework2/service/ConsoleService.class
 deim/urv/cat/homework2/controller/ShowGameController.class
 deim/urv/cat/homework2/service/UserService.class
 deim/urv/cat/homework2/service/GameTypeService$1.class
+<<<<<<< Updated upstream
+=======
+deim/urv/cat/homework2/model/Cart.class
+deim/urv/cat/homework2/controller/GameDetailsController.class
+>>>>>>> Stashed changes
 deim/urv/cat/homework2/model/Game.class
 deim/urv/cat/homework2/controller/LogoutController.class
 deim/urv/cat/homework2/model/Console.class

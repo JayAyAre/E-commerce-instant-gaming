@@ -89,9 +89,10 @@ public class IndexController {
         
         models.put("currentPage", page);
         
-        int gameCount = games != null ? games.size() : 0;
-        int totalPages = (int) Math.ceil((double) gameCount / 8);
-        
+        // Obtener el conteo total de juegos
+        int totalGameCount = gameService.countGames(consoleId, gameTypeIds);
+        int totalPages = (int) Math.ceil((double) totalGameCount / pageSize);
+       
         models.put("totalPages", totalPages);
 
         return "index.jsp";
