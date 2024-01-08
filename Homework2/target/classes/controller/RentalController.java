@@ -9,6 +9,7 @@ import deim.urv.cat.homework2.model.Console;
 import deim.urv.cat.homework2.model.Customer;
 import deim.urv.cat.homework2.model.Game;
 import deim.urv.cat.homework2.model.Rental;
+import deim.urv.cat.homework2.model.User;
 import deim.urv.cat.homework2.service.ConsoleService;
 import deim.urv.cat.homework2.service.GameService;
 import deim.urv.cat.homework2.service.GameTypeService;
@@ -61,7 +62,7 @@ public class RentalController {
         Cart cart = (Cart) session.getAttribute("cart");
         games = cart.getGames();
 
-        Customer customer = (Customer) session.getAttribute("AuthUser");
+        User customer = (User)session.getAttribute("authUser");
                 
         if(customer==null){
             response.sendRedirect(request.getContextPath() + "error");
