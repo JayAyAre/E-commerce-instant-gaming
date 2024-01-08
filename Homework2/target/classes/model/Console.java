@@ -48,7 +48,7 @@ public class Console implements Serializable {
 
     @Override
     public String toString() {
-        return name;
+        return Long.toString(id);
     }
 }
 

@@ -14,8 +14,8 @@
         display: inline-block;
     }
 </style>
-<header class="sticky top-0">
-    <div class="w-full bg-main-black flex flex-row justify-between pl-4 pr-8 bg-opacity-95">
+<header class="sticky top-0 z-20">
+    <div class="w-full bg-main-black flex flex-row justify-between pl-4 pr-8 bg-opacity-85" style="backdrop-filter: blur(30px);">
         <img class="w-24 h-24" src="${pageContext.request.contextPath}/resources/img/logo.png" alt="Logo de Garlic Games">
         <div class="flex flex-row text-white items-center gap-4">
             <c:forEach var="console" items="${consoles}">
