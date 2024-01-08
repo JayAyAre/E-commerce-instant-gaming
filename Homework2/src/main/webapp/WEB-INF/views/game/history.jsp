@@ -35,6 +35,7 @@
 </head>
 <body class="bg-[#272727]">
 
+    <jsp:include page="/WEB-INF/views/layout/header.jsp" />
 
     <div class="flex flex-col lg:flex-row gap-4 sm:gap-16 mx-[2rem] sm:mx-auto sm:max-w-5xl relative z-1">
         <div class="flex flex-col sm:flex-row gap-4 mt-12">
