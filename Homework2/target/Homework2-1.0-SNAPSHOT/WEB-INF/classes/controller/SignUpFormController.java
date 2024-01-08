@@ -27,7 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Controller
-@Path("SignUp")
+@Path("sign-up")
 public class SignUpFormController {    
     // CDI
     @Inject BindingResult bindingResult;
@@ -70,9 +70,15 @@ public class SignUpFormController {
             return "signup-form.jsp";
         }
         log.log(Level.INFO, "Redirecting to the success page.");
-        HttpSession session = request.getSession(true);
-        session.setAttribute("username", userForm.getUsername());
+        
+        
         service.addUser(userForm);
-        return "signup-success.jsp";
+        
+        user = service.findUserByEmail(userForm.getEmail());
+        HttpSession session = request.getSession(true);
+        session.setAttribute("authUser", user);
+        System.out.println(user);
+     
+        return "redirect:shop";
     } 
 }

@@ -33,8 +33,11 @@ public class GameService {
         return null;
     }
     
-    public int countGames(){
-        String gameCount = webTarget.path("count")
+    public int countGames(Long consoleId, List<Long> gameTypeIds){
+        
+        System.out.println("Estoy en serviciooo");
+        String gameCount = buildQuery(consoleId, gameTypeIds)
+                .path("count")
                 .request(MediaType.TEXT_PLAIN)
                 .get(String.class);
         return Integer.parseInt(gameCount);

@@ -155,7 +155,7 @@
         <div class="grid grid-cols-3 gap-8">
             <c:forEach var="game" items="${games}">
                 <div>
-                    <div onclick="location.href='ShowGame/${game.id}'" class="w-full h-[12.5rem] rounded-xl bg-cover bg-center hover:scale-105 transition transition-all cursor-pointer" style="background-image: url('${pageContext.request.contextPath}/resources/img/banner.jpg')">
+                    <div onclick="location.href='game-details/${game.id}'" class="w-full h-[12.5rem] rounded-xl bg-cover bg-center hover:scale-105 transition transition-all cursor-pointer" style="background-image: url('${pageContext.request.contextPath}/resources/img/banner.jpg')">
 
                     </div>
                     <div class="flex flex-row justify-between items-center mt-2">

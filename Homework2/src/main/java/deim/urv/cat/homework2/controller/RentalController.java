@@ -62,7 +62,8 @@ public class RentalController {
         Cart cart = (Cart) session.getAttribute("cart");
         games = cart.getGames();
 
-        User user = (User) session.getAttribute("authUser");
+
+        User customer = (User)session.getAttribute("authUser");
                 
         if(user==null){
             response.sendRedirect(request.getContextPath() + "error");

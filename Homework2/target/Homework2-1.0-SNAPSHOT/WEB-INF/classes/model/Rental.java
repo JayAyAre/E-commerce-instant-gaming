@@ -21,7 +21,7 @@ public class Rental implements Serializable {
     private Date startDate;
     private Date finalDate;
     private Collection<Long> gameId;
-    private String customerId;
+    private Long customerId;
     private Collection<Game> rentedGames;
     private Customer tenant;
         
@@ -32,13 +32,13 @@ public class Rental implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
-    public String getCustomerId() {
+
+    public Long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String id) {
-        this.customerId = id;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
     public Collection<Long> getGameId() {
