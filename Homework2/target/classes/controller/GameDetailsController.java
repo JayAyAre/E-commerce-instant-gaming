@@ -21,39 +21,34 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
-@Path("ShowGame")
-public class ShowGameController {
-    @Inject BindingResult bindingResult;
-    @Inject Logger log;
+@Path("game-details")
+public class GameDetailsController {
     @Inject GameService gameService;
     @Inject ConsoleService consoleService;
     @Inject GameTypeService typeService;
     @Inject Models models;
-    @Inject AlertMessage flashMessage;
-    @Inject SignUpAttempts attempts;
 
     @GET
     @Path("{id}")
-    public String showGame(@PathParam("id") String id) {
-        Collection<Console> consoles = consoleService.getAllConsoles();
-        models.put("consoles", consoles);
+    public String GameDetails(@PathParam("id") String id) {
         Game game = gameService.findGame(id);
+        Collection<Console> consoles = consoleService.getAllConsoles();
         Console console = consoleService.findConsole(game.getConsoleId());
         Collection<GameType> types = typeService.findGameTypes((List<Long>) game.getTypeIds());
-        System.out.println(game);
-        if(game != null && console != null && types != null){
+        
+        if(game == null || console == null || types == null || Long.parseLong(id) < 1 || id.isEmpty()){
+            return "redirect:/shop";
+        }else{
             String[] typeNames = new String[types.size()];
             int i = 0;
             for (GameType type : types) {
                 typeNames[i++] = type.getName();
             }
-            
+            models.put("consoles", consoles);
             models.put("game", game);
             models.put("console", console);
             models.put("types", typeNames);
             return "game/show.jsp";
-        }else{
-            return "error404.jsp";
         }
     }
 }

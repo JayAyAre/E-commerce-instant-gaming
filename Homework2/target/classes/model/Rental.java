@@ -16,7 +16,7 @@ import java.util.Collection;
 
 public class Rental implements Serializable {
     private static final long serialVersionUID = 1L;
-    private String id;
+    private Long id;
     private float price;
     private Date startDate;
     private Date finalDate;
@@ -25,11 +25,11 @@ public class Rental implements Serializable {
     private Collection<Game> rentedGames;
     private Customer tenant;
         
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
     
