@@ -44,7 +44,11 @@
                 <div class="flex flex-row justify-between items-center mx-4">
                     <c:choose>
                         <c:when test="${not empty param.console}">
-                            <p>${consolesMap[Long.parseLong(param.console)]}</p>
+                            <p>${consoles.stream()
+                                .filter(console -> console.getId().equals(Long.parseLong(param.console)))
+                                .findFirst()
+                                .orElse(null).name}
+                            </p>
                         </c:when>
                         <c:otherwise>
                                 <span>Consoles</span>
@@ -54,9 +58,16 @@
                 </div>
             </div>
             <c:if test="${not empty param.console}">
-                <div class="absolute top-0 right-0 w-6 h-6 rounded-full bg-main-orange text-white translate-x-1/2 -translate-y-1/2 flex justify-center items-center cursor-pointer hover:bg-main-orange-light">
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                </div>
+                <form action="shop/remove-console" method="get">
+                    <button type="submit" class="absolute top-0 right-0 w-6 h-6 rounded-full bg-main-orange text-white translate-x-1/2 -translate-y-1/2 flex justify-center items-center cursor-pointer hover:bg-main-orange-light">
+                        <c:if test="${not empty paramValues.gameType}">
+                            <c:forEach var="gameTypeId" items="${paramValues.gameType}">
+                                <input type="hidden" name="gameType" value="${gameTypeId}" />
+                            </c:forEach>
+                        </c:if>
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </form>
             </c:if>
             <div class="dropdown-menu-consoles absolute bg-white bg-opacity-20 border border-0 rounded-md p-4 w-full top-full mt-2.5 hidden" style="backdrop-filter: blur(50px); z-index: 50;">
                 <div class="flex flex-col items-start">
@@ -82,10 +93,23 @@
                         <c:when test="${not empty param.gameType}">
                             <div class="flex justify-start items-center gap-4">
                             <c:forEach var="gameTypeId" items="${paramValues.gameType}">
-                                <div class="flex items-center gap-1">
-                                    <i class="fa fa-times cursor-pointer hover:text-main-orange-light" aria-hidden="true"></i>
-                                    <span>${gameTypesMap[Long.parseLong(gameTypeId)]}</span>
-                                </div>
+                                <form action="remove-gametype">
+                                    <div class="flex items-center gap-1">
+                                        <button type="submit"><i class="fa fa-times cursor-pointer hover:text-main-orange-light" aria-hidden="true"></i></button>
+                                        <span>${gameTypes.stream()
+                                            .filter(gameType -> gameType.getId().equals(Long.parseLong(gameTypeId)))
+                                            .findFirst()
+                                            .orElse(null).name}</span>
+                                        <c:if test="${not empty paramValues.gameType}">
+                                            <c:forEach var="gameTypeId" items="${paramValues.gameType}">
+                                                <input type="hidden" name="gameType" value="${gameTypeId}" />
+                                            </c:forEach>
+                                        </c:if>
+                                        <c:if test="${not empty param.console}">
+                                            <input type="hidden" name="console" value="${param.console}" />
+                                        </c:if>
+                                    </div>
+                                </form>
                             </c:forEach>
                             </div>
                         </c:when>
@@ -99,9 +123,14 @@
                 </div>
             </div>
             <c:if test="${not empty param.gameType}">
-                <div class="absolute top-0 right-0 w-6 h-6 rounded-full bg-main-orange text-white translate-x-1/2 -translate-y-1/2 flex justify-center items-center cursor-pointer hover:bg-main-orange-light">
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                </div>
+                <form action="shop/remove-gametypes" method="get">
+                    <c:if test="${not empty param.console}">
+                        <input type="hidden" name="console" value="${param.console}" />
+                    </c:if>
+                    <button type="submit" class="absolute top-0 right-0 w-6 h-6 rounded-full bg-main-orange text-white translate-x-1/2 -translate-y-1/2 flex justify-center items-center cursor-pointer hover:bg-main-orange-light">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </form>
             </c:if>
             <div class="dropdown-menu-gameTypes absolute bg-white bg-opacity-20 border border-0 rounded-md p-4 w-full top-full mt-2.5 hidden" style="backdrop-filter: blur(50px); z-index: 50;">
                 <div class="flex flex-col items-start">

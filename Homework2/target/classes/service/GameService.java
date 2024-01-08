@@ -40,7 +40,7 @@ public class GameService {
         return Integer.parseInt(gameCount);
     }
     
-    public List<Game> getAllgames(int page, int pageSize, int consoleId, List<Long> gameTypeIds){
+    public List<Game> getAllgames(int page, int pageSize, Long consoleId, List<Long> gameTypeIds){
         Response response = buildQuery(consoleId, gameTypeIds)
                 .queryParam("page", page)
                 .queryParam("pageSize", pageSize)
@@ -52,10 +52,10 @@ public class GameService {
         return null;
     }
     
-    private WebTarget buildQuery(int consoleId, List<Long> gameTypeIds){
+    private WebTarget buildQuery(Long consoleId, List<Long> gameTypeIds){
         WebTarget queryTarget = webTarget;
 
-        if (consoleId > 0) {
+        if (consoleId !=null) {
             queryTarget = queryTarget.queryParam("console", consoleId);
         }
 

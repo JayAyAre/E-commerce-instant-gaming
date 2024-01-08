@@ -28,6 +28,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.UriBuilder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -54,32 +55,93 @@ public class IndexController {
     public String showIndex(@Context HttpServletRequest request, 
         @QueryParam("page") @DefaultValue("1") int page,
         @QueryParam("pageSize") @DefaultValue("9") int pageSize,
-        @QueryParam("console") int consoleId,
+        @QueryParam("console") Long consoleId,
         @QueryParam("gameType") List<Long> gameTypeIds) {
         
-        Collection<Console> consoles = consoleService.getAllConsoles();
-        models.put("consoles", consoles); 
-        Map<Long, String> consolesMap = consoles.stream()
-        .collect(Collectors.toMap(Console::getId, Console::getName));
-        models.put("consolesMap", consolesMap);
+        List<Console> consoles = consoleService.getAllConsoles();
+        models.put("consoles", consoles);
         Collection<GameType> gameTypes = gameTypeService.getAllGameTypes();
         models.put("gameTypes", gameTypes);
-        Map<Long, String> gameTypesMap = gameTypes.stream()
-        .collect(Collectors.toMap(GameType::getId, GameType::getName));
-        models.put("gameTypesMap", gameTypesMap);
+        System.out.println("cabronmierdas: "+consoleId);
+        System.out.println("cabronmierdas: "+consoles);
+        
+        boolean consoleParameter = consoles.stream()
+        .anyMatch(console -> console.getId().equals(consoleId));
+        System.out.println("cabronmierdas: "+consoleParameter);
+
+        if (!consoleParameter && consoleId!=null) {
+            System.out.println("Entro:");
+            return removeConsoleParameter(gameTypeIds);
+        }
+        
+        boolean gameTypeParameter;
+        for(Long gameTypeId : gameTypeIds){
+            gameTypeParameter = gameTypes.stream()
+                .anyMatch(gameType -> gameType.getId().equals(gameTypeId)); 
+            if (!gameTypeParameter) {
+                return removeGameType(consoleId, gameTypeIds, gameTypeId);
+            }
+        }
+        
         Collection<Game> games;
         games = gameService.getAllgames(page, pageSize, consoleId, gameTypeIds);
         models.put("games", games); 
+        
         models.put("currentPage", page);
         
         int gameCount = games != null ? games.size() : 0;
-        System.out.println("Tamano; "+ gameCount);
         int totalPages = (int) Math.ceil((double) gameCount / 8);
-
+        
         models.put("totalPages", totalPages);
 
         return "index.jsp";
     }  
+    
+    @GET
+    @Path("remove-gametype")
+    public String removeGameType(@QueryParam("console") Long consoleId,
+                                 @QueryParam("gameType") List<Long> gameTypeIds,
+                                 @QueryParam("gameTypeToRemove") Long gameTypeToRemove) {
+
+        UriBuilder uriBuilder = UriBuilder.fromPath("/shop");
+
+        if (consoleId != null) {
+            uriBuilder.queryParam("console", consoleId);
+        }
+
+        if (gameTypeIds != null) {
+            gameTypeIds.stream()
+                .filter(gameTypeId -> !gameTypeId.equals(gameTypeToRemove))
+                .forEach(gameTypeId -> uriBuilder.queryParam("gameType", gameTypeId));
+        }
+
+        String newUrl = uriBuilder.build().toString();
+        return "redirect:" + newUrl;
+    }
+    
+    @GET
+    @Path("remove-console")
+    public String removeConsoleParameter(@QueryParam("gameType") List<Long> typesIds){
+        String params = "";
+        for (Long typeId : typesIds) {
+            params = params + "&gameType=" + typeId;
+        }
+        return "redirect:/shop?page=" + params;
+    }
+    
+    @GET
+    @Path("remove-gametypes")
+    public String removeGameTypes(@QueryParam("console") int consoleId){
+        String params = consoleId > 0 ? "&console=" + consoleId : "";
+        return "redirect:/shop?page=" + params;
+    }
+    
+    @GET
+    @Path("remove-gametypes-/{id}")
+    public String removeGameType(@QueryParam("console") int consoleId){
+        String params = consoleId > 0 ? "&console=" + consoleId : "";
+        return "redirect:/shop?page=" + params;
+    }
     
     @GET
     @Path("/next-page")
