@@ -4,21 +4,19 @@
  */
 package deim.urv.cat.homework2.service;
 
-import deim.urv.cat.homework2.model.Game;
 import deim.urv.cat.homework2.model.Rental;
-import deim.urv.cat.homework2.model.RentalDTO;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
  * @author jordi
  */
+
 public class RentalService {
     private final WebTarget webTarget;
     private final jakarta.ws.rs.client.Client client;
@@ -39,7 +37,6 @@ public class RentalService {
         return null;
     }
 
-
     public ArrayList<Rental> getAllRentals(){
         Response response = webTarget.request(MediaType.APPLICATION_JSON)
                 .get();
@@ -49,15 +46,14 @@ public class RentalService {
         return null;
     }    
     
-    public Rental postRental(Rental rental){
-       Response response = webTarget.request(MediaType.APPLICATION_JSON)
-               .post(Entity.entity(
-                    rental, 
-                    MediaType.APPLICATION_JSON
+    public Response postRental(Rental rental) {
+        System.out.print(rental);
+        Response response = webTarget.request(MediaType.APPLICATION_JSON)
+                .post(Entity.entity(
+                       rental,
+                       MediaType.APPLICATION_JSON
                 ));
-       if (response.getStatus() == 200) {
-           return response.readEntity(Rental.class);
-       }
-       return null;
-    }   
+        System.out.print(response.getEntity().toString());
+        return response;
+    }
 }

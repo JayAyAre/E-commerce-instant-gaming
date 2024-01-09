@@ -33,7 +33,7 @@
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
           crossorigin="anonymous"/>
 </head>
-<body class="bg-[#272727]">
+<body class="bg-[#272727] min-h-screen flex flex-col flex-grow">
 
     <jsp:include page="/WEB-INF/views/layout/header.jsp" />
 
@@ -75,7 +75,7 @@
         </div>
     </div>
 
-    <div class='flex flex-col items-center z-1'>
+    <div class='flex flex-col w-full mt-auto -mb-2'>
         <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
     </div>
 </body>

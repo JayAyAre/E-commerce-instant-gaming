@@ -6,6 +6,7 @@ package deim.urv.cat.homework2.controller;
 
 import deim.urv.cat.homework2.model.Cart;
 import deim.urv.cat.homework2.model.Console;
+import deim.urv.cat.homework2.model.Game;
 import deim.urv.cat.homework2.service.ConsoleService;
 import deim.urv.cat.homework2.service.GameService;
 import jakarta.enterprise.inject.Model;
@@ -38,6 +39,7 @@ public class CartController {
 
     @GET
     public String viewCart(@Context HttpServletRequest request) {
+        
         HttpSession session = request.getSession(false);
         Collection<Console> consoles = consoleService.getAllConsoles();
         models.put("consoles", consoles);
@@ -53,21 +55,23 @@ public class CartController {
 
     @POST
     public String addToCart(@Context HttpServletRequest request) {
+        
         String gameId = request.getParameter("gameId");
         if(Long.parseLong(gameId) < 1){
              return "error404.jsp";
         }
+     
         HttpSession session = request.getSession(false);
         Cart cart = (Cart) session.getAttribute("cart");
-        
         if (cart == null) {
              cart = new Cart();
              session.setAttribute("cart", cart);
         }
-
-        cart.addGame(gameService.findGame(gameId));
+        
+        Game game = gameService.findGame(gameId);
+        cart.addGame(game);
         session.setAttribute("cart", cart);
-
+        
         Collection<Console> consoles = consoleService.getAllConsoles();
         models.put("consoles", consoles);
         return "game/cart.jsp";
@@ -92,6 +96,5 @@ public class CartController {
         models.put("consoles", consoles);
 
         response.sendRedirect(request.getContextPath() + "/Web/cart");
-
     }
 }

@@ -32,7 +32,7 @@
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
           crossorigin="anonymous"/>
 </head>
-<body class="bg-[#272727]">
+<body class="bg-[#272727] min-h-screen">
     <jsp:include page="/WEB-INF/views/layout/header.jsp" />
     <div class="relative hidden sm:block z-0 h-56 md:h-72 lg:h-96 xl:h-[25rem] bg-center xl:bg-cover" style="background-image: url('${pageContext.request.contextPath}/resources/img/banner2.png')">
         <div class="absolute bottom-0 left-0 w-full h-16" style="background-image: linear-gradient(to top right, #272727 50%, transparent 50%);"></div>
@@ -74,12 +74,13 @@
         </div>
     </div>
         
-    <div class='flex flex-col items-center mt-8 lg:flex-row gap-16 mx-auto max-w-5xl relative text-[#8A8A8A]'>
-        <p class="mb-2">${game.getDescription()}</p>
+    <div class='flex flex-col items-center mt-8 lg:flex-row gap-16 mx-auto max-w-5xl relative text-[#8A8A8A] mb-auto'>
+        <p class="">${game.getDescription()}</p>
     </div>
-   
-    <div class='flex flex-col items-center '>
+
+    <div class='absolute bottom-0 w-full'>
         <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
-    </div>     
+    </div>
+
 </body>
 </html>

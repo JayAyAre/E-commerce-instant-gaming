@@ -33,14 +33,14 @@
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
           crossorigin="anonymous"/>
 </head>
-<body class="bg-[#272727]">
+<body class="bg-[#272727] min-h-screen flex flex-col flex-grow">
     <jsp:include page="/WEB-INF/views/layout/header.jsp" />
 
 
     <div class="flex flex-col lg:flex-row gap-4 sm:gap-16 mx-[2rem] sm:mx-auto sm:max-w-5xl relative z-1">
         <div class="flex flex-col sm:flex-row gap-4 mt-12">
             <div class="flex flex-col lg:w-auto text-main-gray-medium bg-main-gray-light p-6 rounded-2xl">
-                <h2 class="text-3xl font-semibold mb-4 text-white">Shopping Cart</h2>
+                <h2 class="text-3xl font-semibold mb-8 text-white">Shopping Cart</h2>
                 <c:if test="${not empty sessionScope.cart.games}">
                     <c:set var="total" value="0.0" scope="page" />
                     <c:forEach var="item" items="${sessionScope.cart.games}">
@@ -84,7 +84,7 @@
         </div>
     </div>
 
-    <div class='flex flex-col items-center z-1'>
+    <div class='flex flex-col w-full mt-auto -mb-2'>
         <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
     </div>
 </body>

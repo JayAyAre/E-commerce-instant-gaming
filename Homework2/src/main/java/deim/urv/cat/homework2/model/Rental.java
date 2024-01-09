@@ -96,10 +96,10 @@ public class Rental implements Serializable {
     public void setTenant(Customer tenant) {
         this.tenant = tenant;
     }
-    
+
     @Override
     public String toString() {
-        return "Rental[ id=" + id + " ]";
+        return "Rental{" + "id=" + id + ", price=" + price + ", startDate=" + startDate + ", finalDate=" + finalDate + ", gameId=" + gameId + ", customerId=" + customerId + ", rentedGames=" + rentedGames + ", tenant=" + tenant + '}';
     }
     
 }

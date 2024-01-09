@@ -34,6 +34,7 @@ import java.util.List;
  *
  * @author jordi
  */
+
 @Controller
 @Path("history")
 public class RentalController {
@@ -55,7 +56,11 @@ public class RentalController {
     @POST
     public void newRental(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(false);
-
+        
+        if(session==null){
+            response.sendRedirect(request.getContextPath() + "/error");
+        }
+        
         List<Game> games = new ArrayList<>();
         Cart cart = (Cart) session.getAttribute("cart");
         games = cart.getGames();
@@ -63,30 +68,36 @@ public class RentalController {
 
         User user = (User) session.getAttribute("authUser");
                 
-        if(user==null){
-            response.sendRedirect(request.getContextPath() + "error");
+        if(user== null || user.getClass() == null || user.getId()==null){
+            response.sendRedirect(request.getContextPath() + "/error");
         }
         
         Customer customer = new Customer();
         customer.setId(user.getId());
         customer.setEmail(user.getEmail());
         customer.setName(user.getUsername());
-        
+
         String total = request.getParameter("total");
  
         List<Long> gamesId = new ArrayList();
         for(Game game: games){
             gamesId.add(game.getId());
         }
-        
+                
+        System.out.print(user);
+        System.out.print(customer);
+        System.out.print(gamesId);
+
         Rental newRental = new Rental();
         newRental.setCustomerId(customer.getId());
-        newRental.setPrice(Long.parseLong(total));
+        newRental.setPrice(Float.parseFloat(total));
         newRental.setGameId(gamesId);
         Date startDate = new Date();
         newRental.setStartDate(startDate);
-  
+        
+        System.out.print(newRental);
         rentalService.postRental(newRental);
+        
         response.sendRedirect(request.getContextPath() + "/Web/history");
     }   
 }
