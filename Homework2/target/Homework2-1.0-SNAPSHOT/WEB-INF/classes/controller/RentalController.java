@@ -95,9 +95,7 @@ public class RentalController {
         Date startDate = new Date();
         newRental.setStartDate(startDate);
         
-        System.out.print(newRental);
         rentalService.postRental(newRental);
-        
         response.sendRedirect(request.getContextPath() + "/Web/history");
     }   
 }

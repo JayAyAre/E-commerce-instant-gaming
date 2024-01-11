@@ -47,13 +47,12 @@ public class RentalService {
     }    
     
     public Response postRental(Rental rental) {
-        System.out.print(rental);
+        System.out.println(rental);
         Response response = webTarget.request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(
                        rental,
                        MediaType.APPLICATION_JSON
                 ));
-        System.out.print(response.getEntity().toString());
         return response;
     }
 }
