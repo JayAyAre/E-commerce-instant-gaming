@@ -7,4 +7,5 @@ public interface UserService {
     
     public User findUserByEmail(String email);
     public boolean addUser(UserForm user);
+    public User validateUser(UserForm user);
 }
