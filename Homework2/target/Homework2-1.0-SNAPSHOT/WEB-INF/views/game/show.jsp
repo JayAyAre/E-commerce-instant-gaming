@@ -78,7 +78,7 @@
         <p class="">${game.getDescription()}</p>
     </div>
 
-    <div class='absolute bottom-0 w-full'>
+    <div class='flex flex-col mt-auto'>
         <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
     </div>
 

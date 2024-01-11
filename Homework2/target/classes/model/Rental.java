@@ -21,7 +21,7 @@ public class Rental implements Serializable {
     private Date startDate;
     private Date finalDate;
     private Collection<Long> gameId;
-    private Long customerId;
+    private long customerId;
     private Collection<Game> rentedGames;
     private Customer tenant;
         

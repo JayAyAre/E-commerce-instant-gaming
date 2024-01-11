@@ -74,8 +74,6 @@
         </div>
     </div>
 
-    <div class='flex flex-col w-full mt-auto -mb-2'>
-        <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
-    </div>
+    <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
 </body>
 </html>

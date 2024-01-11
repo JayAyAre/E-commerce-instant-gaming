@@ -9,7 +9,6 @@ import deim.urv.cat.homework2.model.Console;
 import deim.urv.cat.homework2.model.Game;
 import deim.urv.cat.homework2.service.ConsoleService;
 import deim.urv.cat.homework2.service.GameService;
-import jakarta.enterprise.inject.Model;
 import jakarta.inject.Inject;
 import jakarta.mvc.Controller;
 import jakarta.mvc.Models;
@@ -81,7 +80,7 @@ public class CartController {
     @Path("{id}")
     public void removeFromCart(@PathParam("id") Long id, @Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
 
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession(false);
         Cart cart = (Cart) session.getAttribute("cart");
 
         if (cart == null) {

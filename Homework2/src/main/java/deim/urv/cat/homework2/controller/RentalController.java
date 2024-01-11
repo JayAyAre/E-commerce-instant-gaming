@@ -82,6 +82,8 @@ public class RentalController {
             response.sendRedirect(request.getContextPath() + "/Error404.jsp");
             return;
         }
+        Cart newCart = new Cart();
+        session.setAttribute("cart", newCart);
         
         Customer customer = new Customer();
         customer.setId(user.getId());
@@ -101,13 +103,16 @@ public class RentalController {
 
         Rental newRental = new Rental();
         newRental.setCustomerId(customer.getId());
-        newRental.setTenant(customer);
         newRental.setPrice(Float.parseFloat(total));
         newRental.setGameId(gamesId);
         Date startDate = new Date();
         newRental.setStartDate(startDate);
+       
         
         rentalService.postRental(newRental, user);
+
+ 
+
         response.sendRedirect(request.getContextPath() + "/Web/history");
     }   
 }

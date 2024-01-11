@@ -105,8 +105,13 @@ public class RentalController {
         newRental.setGameId(gamesId);
         Date startDate = new Date();
         newRental.setStartDate(startDate);
+       
         
         rentalService.postRental(newRental, user);
+
+        Cart newCart = new Cart();
+        session.setAttribute("cart", newCart);
+
         response.sendRedirect(request.getContextPath() + "/Web/history");
     }   
 }
