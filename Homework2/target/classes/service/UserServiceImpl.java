@@ -31,16 +31,16 @@ public class UserServiceImpl implements UserService {
     
     @Override
     public User validateUser(UserForm user){
-        System.out.println("Contraseña al validar"+user.getPassword());
-        Response response = webTarget.path("validate").request(MediaType.APPLICATION_JSON).post(
-        Entity.entity(
-            user, 
-            MediaType.APPLICATION_JSON
-        ), 
-        Response.class);
-        if (response.getStatus() == 200) {
-            return response.readEntity(User.class);
+        User foundUser = findUserByEmail(user.getEmail());
+
+        if (foundUser == null) {
+            return null;
         }
+        
+        if (SecurityUtil.validatePassword(user.getPassword(), foundUser.getPassword())) {
+            return foundUser;
+        }
+ 
         return null;
     }
 

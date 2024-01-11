@@ -12,4 +12,12 @@
         <error-code>404</error-code>
         <location>/Error404.jsp</location>
     </error-page>
+    <filter>
+        <filter-name>authFilter</filter-name>
+        <filter-class>deim.urv.cat.homework2.controller.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>authFilter</filter-name>
+        <url-pattern>/Web/rental-history</url-pattern>
+    </filter-mapping>
 </web-app>

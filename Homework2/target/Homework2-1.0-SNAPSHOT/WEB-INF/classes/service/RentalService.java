@@ -47,7 +47,17 @@ public class RentalService {
             return response.readEntity(new GenericType<ArrayList<Rental>>() {});
         }
         return null;
-    }    
+    }   
+    
+    public ArrayList<Rental> getAllRentalsFromUser(Long authUserId){
+        String userIdString = String.valueOf(authUserId);
+        Response response = webTarget.queryParam("userId", authUserId).request(MediaType.APPLICATION_JSON)
+                .get();
+        if (response.getStatus() == 200) {
+            return response.readEntity(new GenericType<ArrayList<Rental>>() {});
+        }
+        return null;
+    }  
     
     public Rental postRental(Rental rental){
        Response response = webTarget.request(MediaType.APPLICATION_JSON)

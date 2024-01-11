@@ -17,4 +17,8 @@ public class SecurityUtil {
     public static String hashPassword(String password) {
         return encoder.encode(password);
     }
+    
+    public static boolean validatePassword(String providedPassword, String storedPasswordHash) {
+        return encoder.matches(providedPassword, storedPasswordHash);
+    }
 }

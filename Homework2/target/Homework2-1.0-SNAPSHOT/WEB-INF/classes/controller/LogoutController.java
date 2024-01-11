@@ -12,7 +12,7 @@ import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@Path("Logout")
+@Path("sign-out")
 @Controller
 public class LogoutController {
     @Inject Logger log;
@@ -33,7 +33,7 @@ public class LogoutController {
                     new Object [] { key, obj });
         }
         session.invalidate();
-        return "redirect:/SignUp"; 
+        return "redirect:/sign-up"; 
     }    
     
 }

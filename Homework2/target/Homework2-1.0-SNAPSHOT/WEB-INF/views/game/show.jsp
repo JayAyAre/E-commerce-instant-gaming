@@ -78,8 +78,6 @@
         <p class="mb-2">${game.getDescription()}</p>
     </div>
    
-    <div class='flex flex-col items-center '>
         <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
-    </div>     
 </body>
 </html>
