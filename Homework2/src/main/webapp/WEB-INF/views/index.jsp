@@ -4,7 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Sign Up</title>
+    <link rel="icon" href="${pageContext.request.contextPath}/resources/img/logo_icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/logo_icon.png" type="image/x-icon">
+    <link rel="icon" type="image/gif" href="/img/logo_icon.png">
+
+<title>Garlic Games - Los mejores juegos al mejor precio!</title>
 <script src="https://cdn.tailwindcss.com/?plugins=forms"></script>
 <script>
     tailwind.config = {
@@ -38,8 +42,8 @@
         <div class="absolute bottom-0 left-0 w-full h-16" style="background-image: linear-gradient(to top right, #272727 50%, transparent 50%);"></div>
     </div>
         
-    <div class="flex flex-row justify-center gap-6 mt-6">
-        <div class="relative flex flex-col w-2/12">
+    <div class="flex flex-col items-center sm:flex-row justify-center gap-6 mt-6 md:px-0 px-8">
+        <div class="relative flex flex-col w-full sm:w-5/6 md:w-1/4 2xl:w-2/12">
             <div class="dropdown-toggle-consoles block bg-main-gray-input rounded-md border-0 py-4 cursor-pointer text-white shadow-sm ring-2 ring-inset ring-main-gray-medium placeholder:text-gray-400 transition-colors hover:ring-2 hover:ring-inset hover:ring-main-orange focus:ring-2 focus:ring-inset focus:ring-main-orange sm:text-sm sm:leading-6">
                 <div class="flex flex-row justify-between items-center mx-4">
                     <c:choose>
@@ -69,7 +73,7 @@
                     </button>
                 </form>
             </c:if>
-            <div class="dropdown-menu-consoles absolute bg-white bg-opacity-20 border border-0 rounded-md p-4 w-full top-full mt-2.5 hidden" style="backdrop-filter: blur(50px); z-index: 50;">
+            <div class="dropdown-menu-consoles left-0 right-0 md:left-auto md:right-auto absolute bg-white bg-opacity-20 border border-0 rounded-md p-4 w-full top-full mt-2.5 hidden" style="backdrop-filter: blur(50px); z-index: 50;">
                 <div class="flex flex-col items-start">
                     <c:forEach var="console" items="${consoles}">
                         <form class="w-full" action="shop" method="get">
@@ -86,7 +90,7 @@
             </div>
         </div>
         
-        <div class="relative flex flex-col w-2/12">
+        <div class="relative flex flex-col w-full sm:w-5/6 md:w-1/4 2xl:w-2/12">
             <div class="dropdown-toggle-gameTypes block bg-main-gray-input rounded-md border-0 py-4 cursor-pointer text-white shadow-sm ring-2 ring-inset ring-main-gray-medium placeholder:text-gray-400 transition-colors hover:ring-2 hover:ring-inset hover:ring-main-orange focus:ring-2 focus:ring-inset focus:ring-main-orange sm:text-sm sm:leading-6">
                 <div class="flex flex-row justify-between items-center mx-4">
                     <c:choose>
@@ -151,7 +155,7 @@
             </div>
         </div>
     </div>
-    <div class="mx-auto px-8 w-2/3 text-white mb-8">  
+    <div class="mx-auto px-8 2xl:w-2/3 w-full text-white mb-8">  
         <c:choose>
             <c:when test="${sessionScope.authUser != null}">
                 <h2 class="font-bold text-3xl my-8">Recomendations for ${sessionScope.authUser.username}</h2>
@@ -160,7 +164,7 @@
                  <h2 class="font-bold text-3xl my-8">Tendencies</h2>
             </c:otherwise>
         </c:choose> 
-        <div class="grid grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <c:forEach var="game" items="${games}">
                 <div>
                     <div onclick="location.href='game-details/${game.id}'" class="w-full h-[12.5rem] rounded-xl bg-cover bg-center hover:scale-105 transition transition-all cursor-pointer" style="background-image: url('${pageContext.request.contextPath}/resources/img/banner.jpg')">

@@ -58,7 +58,7 @@ public class UserForm implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = SecurityUtil.hashPassword(password);
+        this.password = password;
     }
     
 }

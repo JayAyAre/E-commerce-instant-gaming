@@ -49,7 +49,7 @@ public class SignInFormController {
     @POST
     @UriRef("submit")
     @CsrfProtected
-    public String signUp(@Valid @BeanParam UserForm userForm, @Context HttpServletRequest request) {
+    public String signIn(@Valid @BeanParam UserForm userForm, @Context HttpServletRequest request) {
         models.put("user", userForm);
         if (bindingResult.isFailed()) {
             AlertMessage alert = AlertMessage.danger("Validation failed!");
@@ -63,7 +63,7 @@ public class SignInFormController {
             return "signin-form.jsp";
         }
        
-        User user = service.findUserByEmail(userForm.getEmail());
+        User user = service.validateUser(userForm);
         if (user != null) {
             log.log(Level.INFO, "Redirecting to the success page.");
             HttpSession session = request.getSession(true);

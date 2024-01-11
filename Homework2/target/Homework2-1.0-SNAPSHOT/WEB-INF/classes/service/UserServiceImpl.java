@@ -6,6 +6,7 @@ import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.client.Entity;
+import utilities.SecurityUtil;
 
 public class UserServiceImpl implements UserService {
     private final WebTarget webTarget;
@@ -27,10 +28,26 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+    
+    @Override
+    public User validateUser(UserForm user){
+        System.out.println("Contraseña al validar"+user.getPassword());
+        Response response = webTarget.path("validate").request(MediaType.APPLICATION_JSON).post(
+        Entity.entity(
+            user, 
+            MediaType.APPLICATION_JSON
+        ), 
+        Response.class);
+        if (response.getStatus() == 200) {
+            return response.readEntity(User.class);
+        }
+        return null;
+    }
 
     @Override
     public boolean addUser(UserForm user) {
-        user.setPassword(user.getPassword());
+        user.setPassword(SecurityUtil.hashPassword(user.getPassword()));
+        System.out.println("Contraseña al añadir"+user.getPassword());
         Response response = webTarget.request(MediaType.APPLICATION_JSON).post(
         Entity.entity(
             user, 
