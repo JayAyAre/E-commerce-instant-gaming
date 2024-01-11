@@ -5,12 +5,14 @@
 package deim.urv.cat.homework2.service;
 
 import deim.urv.cat.homework2.model.Rental;
+import deim.urv.cat.homework2.model.User;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.ArrayList;
+import java.util.Base64;
 
 /**
  *
@@ -27,9 +29,12 @@ public class RentalService {
         webTarget = client.target(BASE_URI).path("rental");
     }
     
-    public Rental findRental(String id){
+    public Rental findRental(String id, User user){
+        String credentials = user.getUsername()+ ":" + user.getEmail();
+        String encodedCredentials = Base64.getEncoder().encodeToString(credentials.getBytes());
         Response response = webTarget.path(id)
                 .request(MediaType.APPLICATION_JSON)
+                .header("Authorization", "Basic " + encodedCredentials)
                 .get();
         if (response.getStatus() == 200) {
             return response.readEntity(Rental.class);
@@ -37,22 +42,32 @@ public class RentalService {
         return null;
     }
 
-    public ArrayList<Rental> getAllRentals(){
-        Response response = webTarget.request(MediaType.APPLICATION_JSON)
+    public ArrayList<Rental> findAllRental(Long idUser, User user){
+        String credentials = user.getUsername()+ ":" + user.getEmail();
+        String encodedCredentials = Base64.getEncoder().encodeToString(credentials.getBytes());
+        Response response = webTarget.queryParam("idUser",Long.toString(idUser))
+                .request(MediaType.APPLICATION_JSON)
+                .header("Authorization", "Basic " + encodedCredentials)
                 .get();
         if (response.getStatus() == 200) {
             return response.readEntity(new GenericType<ArrayList<Rental>>() {});
         }
         return null;
-    }    
+    }
+  
     
-    public Response postRental(Rental rental) {
-        System.out.println(rental);
+
+    public Response postRental(Rental rental, User user) {
+        String credentials = user.getUsername()+ ":" + user.getEmail();
+        String encodedCredentials = Base64.getEncoder().encodeToString(credentials.getBytes());
+
         Response response = webTarget.request(MediaType.APPLICATION_JSON)
+                .header("Authorization", "Basic " + encodedCredentials)
                 .post(Entity.entity(
-                       rental,
-                       MediaType.APPLICATION_JSON
+                        rental,
+                        MediaType.APPLICATION_JSON
                 ));
+
         return response;
     }
 }

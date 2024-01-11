@@ -42,8 +42,12 @@ public class RentalService {
         return null;
     }
 
-    public ArrayList<Rental> getAllRentals(){
-        Response response = webTarget.request(MediaType.APPLICATION_JSON)
+    public ArrayList<Rental> findAllRental(Long userId, User user){
+        String credentials = user.getUsername()+ ":" + user.getEmail();
+        String encodedCredentials = Base64.getEncoder().encodeToString(credentials.getBytes());
+        Response response = webTarget.queryParam("userId",Long.toString(userId))
+                .request(MediaType.APPLICATION_JSON)
+                .header("Authorization", "Basic " + encodedCredentials)
                 .get();
         if (response.getStatus() == 200) {
             return response.readEntity(new GenericType<ArrayList<Rental>>() {});

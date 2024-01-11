@@ -11,8 +11,6 @@ import deim.urv.cat.homework2.model.Game;
 import deim.urv.cat.homework2.model.Rental;
 import deim.urv.cat.homework2.model.User;
 import deim.urv.cat.homework2.service.ConsoleService;
-import deim.urv.cat.homework2.service.GameService;
-import deim.urv.cat.homework2.service.GameTypeService;
 import deim.urv.cat.homework2.service.RentalService;
 import jakarta.inject.Inject;
 import jakarta.mvc.Controller;
@@ -45,8 +43,20 @@ public class RentalController {
     @GET
     public String showHistory(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
         ArrayList<Rental> rentals= new ArrayList();
+        HttpSession session = request.getSession(false);
+        if(session==null){
+            response.sendRedirect(request.getContextPath() + "/Error404.jsp");
+        }
+        
+        User user = (User) session.getAttribute("authUser");
+        
+        if(user== null || user.getClass() == null || user.getId()==null){
+            response.sendRedirect(request.getContextPath() + "/Error404.jsp");
+        }
         Collection<Console> consoles = consoleService.getAllConsoles();
-        rentals = rentalService.getAllRentals();
+        rentals = rentalService.findAllRental(user.getId(),user);
+
+        
         models.put("consoles", consoles);
         models.put("rentals", rentals);
         return "game/history.jsp";
@@ -58,7 +68,7 @@ public class RentalController {
         HttpSession session = request.getSession(false);
         
         if(session==null){
-            response.sendRedirect(request.getContextPath() + "/error");
+            response.sendRedirect(request.getContextPath() + "/Error404.jsp");
         }
         
         List<Game> games = new ArrayList<>();
@@ -67,9 +77,10 @@ public class RentalController {
 
 
         User user = (User) session.getAttribute("authUser");
-                
-        if(user== null || user.getClass() == null || user.getId()==null){
-            response.sendRedirect(request.getContextPath() + "/error");
+        
+        if(user== null || user.getClass() == null || user.getId()==null || cart==null){
+            response.sendRedirect(request.getContextPath() + "/Error404.jsp");
+            return;
         }
         
         Customer customer = new Customer();
@@ -95,7 +106,7 @@ public class RentalController {
         Date startDate = new Date();
         newRental.setStartDate(startDate);
         
-        rentalService.postRental(newRental);
+        rentalService.postRental(newRental, user);
         response.sendRedirect(request.getContextPath() + "/Web/history");
     }   
 }
