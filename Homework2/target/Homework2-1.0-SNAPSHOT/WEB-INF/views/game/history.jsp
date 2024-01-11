@@ -42,7 +42,6 @@
             <div class="flex flex-col lg:w-auto text-main-gray-medium bg-main-gray-light p-6 rounded-2xl">
                 <h2 class="text-3xl font-semibold mb-4 text-white">Shopping Cart</h2>
                 <c:if test="${not empty rentals}">
-                    <c:set var="total" value="0.0" scope="page" />
                     <c:forEach var="rental" items="${rentals}">
                         <c:forEach var="game" items="${rental}">
                             <div class="border border-0 rounded-lg text-white bg-gray-dark" style="backdrop-filter: blur(35px);">
@@ -52,7 +51,7 @@
                                         <h3 class="text-xl font-semibold ">${game.name}</h3>
                                         <p class="text-base text-gray-300 mb-2">Console: 
                                             <c:forEach var="console" items="${consoles}">
-                                                <c:if test="${game.consoleId eq console.getId()}">
+                                                <c:if test="${game.consoleId eq console.id}">
                                                     ${console.name}
                                                 </c:if>
                                             </c:forEach>

@@ -42,10 +42,10 @@ public class RentalService {
         return null;
     }
 
-    public ArrayList<Rental> findAllRental(Long userId, User user){
+    public ArrayList<Rental> findAllRental(String userId, User user){
         String credentials = user.getUsername()+ ":" + user.getEmail();
         String encodedCredentials = Base64.getEncoder().encodeToString(credentials.getBytes());
-        Response response = webTarget.queryParam("userId",Long.toString(userId))
+        Response response = webTarget.queryParam("userId",userId)
                 .request(MediaType.APPLICATION_JSON)
                 .header("Authorization", "Basic " + encodedCredentials)
                 .get();

@@ -54,7 +54,7 @@ public class RentalController {
             response.sendRedirect(request.getContextPath() + "/Error404.jsp");
         }
         Collection<Console> consoles = consoleService.getAllConsoles();
-        rentals = rentalService.findAllRental(user.getId(),user);
+        rentals = rentalService.findAllRental(String.valueOf(user.getId()),user);
 
         
         models.put("consoles", consoles);
@@ -101,6 +101,7 @@ public class RentalController {
 
         Rental newRental = new Rental();
         newRental.setCustomerId(customer.getId());
+        newRental.setTenant(customer);
         newRental.setPrice(Float.parseFloat(total));
         newRental.setGameId(gamesId);
         Date startDate = new Date();

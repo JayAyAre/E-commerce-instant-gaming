@@ -54,7 +54,7 @@ public class RentalController {
             response.sendRedirect(request.getContextPath() + "/Error404.jsp");
         }
         Collection<Console> consoles = consoleService.getAllConsoles();
-        rentals = rentalService.findAllRental(user.getId(),user);
+        rentals = rentalService.findAllRental(String.valueOf(user.getId()),user);
 
         
         models.put("consoles", consoles);
