@@ -32,7 +32,8 @@
                     
             <div class="dropdown-menu-profile absolute bg-white text-[1rem] bg-opacity-20 border border-0 rounded-md p-4 w-48 top-full right-0 mr-2.5 mt-2.5 hidden" style="backdrop-filter: blur(50px); z-index: 50;">
                 <div class="flex flex-col items-start">
-                    <a href="rental-history" class="hover:bg-main-orange rounded-lg w-full pl-1.5">History </a>
+                    <a href="history" class="hover:bg-main-orange rounded-lg w-full pl-1.5">History</a>
+                    <a href="profile" class="hover:bg-main-orange rounded-lg w-full pl-1.5">Profile</a>
                     <a href="sign-out" class="hover:bg-main-orange rounded-lg w-full pl-1.5">Sign Out</a>
                 </div>
             </div>        

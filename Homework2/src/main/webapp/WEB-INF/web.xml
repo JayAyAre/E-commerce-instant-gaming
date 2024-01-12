@@ -18,6 +18,6 @@
     </filter>
     <filter-mapping>
         <filter-name>authFilter</filter-name>
-        <url-pattern>/Web/rental-history</url-pattern>
+        <url-pattern>/Web/profile</url-pattern>
     </filter-mapping>
 </web-app>
