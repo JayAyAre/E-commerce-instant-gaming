@@ -28,6 +28,16 @@
       }
     };
 </script>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    .content {
+        flex: 1;
+    }
+</style>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
 <!-- FontAwesome -->
@@ -167,7 +177,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <c:forEach var="game" items="${games}">
                 <div>
-                    <div onclick="location.href='game-details/${game.id}'" class="w-full h-[12.5rem] rounded-xl bg-cover bg-center hover:scale-105 transition transition-all cursor-pointer" style="background-image: url('${pageContext.request.contextPath}/resources/img/banner.jpg')">
+                    <div onclick="location.href='game-details/${game.id}'" class="w-full h-[12.5rem] rounded-xl bg-cover bg-center hover:scale-105 transition transition-all cursor-pointer" style="background-image: url('${pageContext.request.contextPath}/resources/img/${game.image}.jpg')">
 
                     </div>
                     <div class="flex flex-row justify-between items-center mt-2">

@@ -5,6 +5,7 @@
 package deim.urv.cat.homework2.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Cart {
@@ -19,7 +20,14 @@ public class Cart {
     }
 
     public void removeGame(Long gameId) {
-        games.removeIf(game -> game.getId() == gameId);
+        Iterator<Game> iterator = games.iterator();
+        while (iterator.hasNext()) {
+            Game game = iterator.next();
+            if (game.getId().equals(gameId)) {
+                iterator.remove();
+                return;
+            }
+        }
     }
 
     public void clearCart() {

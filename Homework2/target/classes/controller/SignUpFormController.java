@@ -71,7 +71,6 @@ public class SignUpFormController {
         }
         log.log(Level.INFO, "Redirecting to the success page.");
         
-        
         service.addUser(userForm);
         
         user = service.findUserByEmail(userForm.getEmail());

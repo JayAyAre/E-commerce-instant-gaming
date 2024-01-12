@@ -4,21 +4,21 @@
  */
 package deim.urv.cat.homework2.service;
 
-import deim.urv.cat.homework2.model.Game;
 import deim.urv.cat.homework2.model.Rental;
-import deim.urv.cat.homework2.model.RentalDTO;
+import deim.urv.cat.homework2.model.User;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Base64;
 
 /**
  *
  * @author jordi
  */
+
 public class RentalService {
     private final WebTarget webTarget;
     private final jakarta.ws.rs.client.Client client;
@@ -29,9 +29,12 @@ public class RentalService {
         webTarget = client.target(BASE_URI).path("rental");
     }
     
-    public Rental findRental(String id){
+    public Rental findRental(String id, User user){
+        String credentials = user.getUsername()+ ":" + user.getEmail();
+        String encodedCredentials = Base64.getEncoder().encodeToString(credentials.getBytes());
         Response response = webTarget.path(id)
                 .request(MediaType.APPLICATION_JSON)
+                .header("Authorization", "Basic " + encodedCredentials)
                 .get();
         if (response.getStatus() == 200) {
             return response.readEntity(Rental.class);
@@ -39,35 +42,32 @@ public class RentalService {
         return null;
     }
 
+    public ArrayList<Rental> findAllRental(String userId, User user){
+        String credentials = user.getUsername()+ ":" + user.getEmail();
+        String encodedCredentials = Base64.getEncoder().encodeToString(credentials.getBytes());
+        Response response = webTarget.queryParam("userId",userId)
+                .request(MediaType.APPLICATION_JSON)
+                .header("Authorization", "Basic " + encodedCredentials)
+                .get();
+        if (response.getStatus() == 200) {
+            return response.readEntity(new GenericType<ArrayList<Rental>>() {});
+        }
+        return null;
+    }
+  
+    
 
-    public ArrayList<Rental> getAllRentals(){
+    public Response postRental(Rental rental, User user) {
+        String credentials = user.getUsername()+ ":" + user.getEmail();
+        String encodedCredentials = Base64.getEncoder().encodeToString(credentials.getBytes());
+
         Response response = webTarget.request(MediaType.APPLICATION_JSON)
-                .get();
-        if (response.getStatus() == 200) {
-            return response.readEntity(new GenericType<ArrayList<Rental>>() {});
-        }
-        return null;
-    }   
-    
-    public ArrayList<Rental> getAllRentalsFromUser(Long authUserId){
-        String userIdString = String.valueOf(authUserId);
-        Response response = webTarget.queryParam("userId", authUserId).request(MediaType.APPLICATION_JSON)
-                .get();
-        if (response.getStatus() == 200) {
-            return response.readEntity(new GenericType<ArrayList<Rental>>() {});
-        }
-        return null;
-    }  
-    
-    public Rental postRental(Rental rental){
-       Response response = webTarget.request(MediaType.APPLICATION_JSON)
-               .post(Entity.entity(
-                    rental, 
-                    MediaType.APPLICATION_JSON
+                .header("Authorization", "Basic " + encodedCredentials)
+                .post(Entity.entity(
+                        rental,
+                        MediaType.APPLICATION_JSON
                 ));
-       if (response.getStatus() == 200) {
-           return response.readEntity(Rental.class);
-       }
-       return null;
-    }   
+
+        return response;
+    }
 }

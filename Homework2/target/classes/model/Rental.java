@@ -16,20 +16,30 @@ import java.util.Collection;
 
 public class Rental implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Long id;
+    private String id;
     private float price;
     private Date startDate;
     private Date finalDate;
     private Collection<Long> gameId;
-    private Long customerId;
+    private long customerId;
     private Collection<Game> rentedGames;
     private Customer tenant;
+    private Collection<RentalGameQuantity> rentalGameQuantities;
+
+    public Collection<RentalGameQuantity> getRentalGameQuantities() {
+        return rentalGameQuantities;
+    }
+
+    public void setRentalGameQuantities(Collection<RentalGameQuantity> rentalGameQuantities) {
+        this.rentalGameQuantities = rentalGameQuantities;
+    }
+    
         
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -96,10 +106,10 @@ public class Rental implements Serializable {
     public void setTenant(Customer tenant) {
         this.tenant = tenant;
     }
-    
+
     @Override
     public String toString() {
-        return "Rental[ id=" + id + " ]";
+        return "Rental{" + "id=" + id + ", price=" + price + ", startDate=" + startDate + ", finalDate=" + finalDate + ", gameId=" + gameId + ", customerId=" + customerId + ", rentedGames=" + rentedGames + ", tenant=" + tenant + '}';
     }
     
 }

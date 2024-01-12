@@ -11,8 +11,6 @@ import deim.urv.cat.homework2.model.Game;
 import deim.urv.cat.homework2.model.Rental;
 import deim.urv.cat.homework2.model.User;
 import deim.urv.cat.homework2.service.ConsoleService;
-import deim.urv.cat.homework2.service.GameService;
-import deim.urv.cat.homework2.service.GameTypeService;
 import deim.urv.cat.homework2.service.RentalService;
 import jakarta.inject.Inject;
 import jakarta.mvc.Controller;
@@ -34,20 +32,30 @@ import java.util.List;
  *
  * @author jordi
  */
+
 @Controller
 @Path("history")
 public class RentalController {
-    @Inject GameService gameService;
     @Inject ConsoleService consoleService;
-    @Inject GameTypeService typeService;
     @Inject RentalService rentalService;
     @Inject Models models;
 
     @GET
     public String showHistory(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
         ArrayList<Rental> rentals= new ArrayList();
+        HttpSession session = request.getSession(false);
+        if(session==null){
+            response.sendRedirect(request.getContextPath() + "/Error404.jsp");
+        }
+        
+        User user = (User) session.getAttribute("authUser");
+        
+        if(user== null || user.getClass() == null || user.getId()==null){
+            response.sendRedirect(request.getContextPath() + "/Error404.jsp");
+        }
+        
         Collection<Console> consoles = consoleService.getAllConsoles();
-        rentals = rentalService.getAllRentals();
+        rentals = rentalService.findAllRental(String.valueOf(user.getId()),user);    
         models.put("consoles", consoles);
         models.put("rentals", rentals);
         return "game/history.jsp";
@@ -57,32 +65,46 @@ public class RentalController {
     @POST
     public void newRental(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(false);
-
+        
+        if(session==null){
+            response.sendRedirect(request.getContextPath() + "/Error404.jsp");
+        }
+        
         List<Game> games = new ArrayList<>();
         Cart cart = (Cart) session.getAttribute("cart");
         games = cart.getGames();
 
-        User customer = (User)session.getAttribute("authUser");
-                
-        if(customer==null){
-            response.sendRedirect(request.getContextPath() + "error");
+
+        User user = (User) session.getAttribute("authUser");
+        
+        if(user== null || user.getClass() == null || user.getId()==null){
+            response.sendRedirect(request.getContextPath() + "/Error404.jsp");
+            return;
         }
         
-        String total = request.getParameter("total");
+        Cart newCart = new Cart();
+        Customer customer = new Customer();
+        Rental newRental = new Rental();
+        Date startDate = new Date();
+        
+        session.setAttribute("cart", newCart);
+   
+        customer.setId(user.getId());
+        customer.setEmail(user.getEmail());
+        customer.setName(user.getUsername());
  
         List<Long> gamesId = new ArrayList();
         for(Game game: games){
             gamesId.add(game.getId());
         }
-        
-        Rental newRental = new Rental();
+         
         newRental.setCustomerId(customer.getId());
-        newRental.setPrice(Long.parseLong(total));
         newRental.setGameId(gamesId);
-        Date startDate = new Date();
         newRental.setStartDate(startDate);
-  
-        rentalService.postRental(newRental);
+        
+        System.out.println(newRental);
+        rentalService.postRental(newRental, user);
+
         response.sendRedirect(request.getContextPath() + "/Web/history");
     }   
 }
