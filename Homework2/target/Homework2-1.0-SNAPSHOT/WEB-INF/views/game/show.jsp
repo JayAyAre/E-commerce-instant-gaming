@@ -49,7 +49,7 @@
     </div>
 
         
-    <div class="flex flex-col items-center sm:-mt-48 lg:flex-row gap-4 sm:gap-16 mx-[2rem] sm:mx-auto sm:max-w-5xl relative">
+    <div class="flex flex-col items-center sm:-mt-48 lg:flex-row gap-4 sm:gap-12 mx-[2rem] sm:mx-auto sm:max-w-5xl relative">
         <!-- Resto del contenido -->
         <img class="rounded-lg sm:w-full sm:h-[22rem]" src="${pageContext.request.contextPath}/resources/img/${game.getImage()}.jpg" alt="Game image">
 
