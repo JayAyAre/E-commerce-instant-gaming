@@ -33,7 +33,7 @@ public class LogoutController {
                     new Object [] { key, obj });
         }
         session.invalidate();
-        return "redirect:/sign-up"; 
+        return "redirect:/sign-in"; 
     }    
     
 }

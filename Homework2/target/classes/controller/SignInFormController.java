@@ -70,7 +70,6 @@ public class SignInFormController {
             session.setAttribute("authUser", user);
             return "redirect:shop";
         }
-        models.put("user", userForm);
         models.put("message", "Wrong credentials!");
         return "signin-form.jsp";
     } 

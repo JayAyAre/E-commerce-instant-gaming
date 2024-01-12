@@ -49,9 +49,49 @@ public class ProfileController {
     // CDI
     @Inject Logger log;
     @Inject Models models;
+    @Inject BindingResult bindingResult;
+    @Inject UserService service;
+
+
     
     @GET
     public String showProfile(@Context HttpServletRequest request) {
         return "profile.jsp";
+    }
+    
+    @POST
+    @UriRef("profile")
+    public String updateProfile(@Context HttpServletRequest request, @Valid @BeanParam UserUpdateForm userUpdateForm){
+        models.put("user", userUpdateForm);
+        if (bindingResult.isFailed()) {
+            AlertMessage alert = AlertMessage.danger("Validation failed!");
+            bindingResult.getAllErrors()
+                    .stream()
+                    .forEach((ParamError t) -> {
+                        alert.addError(t.getParamName(), "", t.getMessage());
+                    });
+            log.log(Level.WARNING, "Data binding for signupFormController failed.");
+            models.put("errors", alert);
+            return "profile.jsp";
+        }
+       
+        HttpSession session = request.getSession(false);
+        User authUser = (User) session.getAttribute("authUser");
+        
+        User user = service.findUserByEmail(userUpdateForm.getEmail());
+        if (user != null && !userUpdateForm.getEmail().equalsIgnoreCase(authUser.getEmail())) {
+            log.log(Level.WARNING, "A user with this e-mail address {0} already exists.", userUpdateForm.getEmail());
+            models.put("message", "A user with this e-mail address already exists!");
+            return "profile.jsp";
+        }
+        
+        System.out.println(user.getPassword());
+        
+        service.updateUser(userUpdateForm, authUser);
+        log.log(Level.INFO, "Redirecting to the success page.");
+        
+        user = service.findUserByEmail(userUpdateForm.getEmail());
+        session.setAttribute("authUser", user);
+        return "redirect:shop"; 
     }
 }
