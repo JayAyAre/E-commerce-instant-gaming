@@ -24,15 +24,25 @@
       }
     };
 </script>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    .content {
+        flex: 1;
+    }
+</style>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-<!-- FontAwesome -->
+<!-- FontAwesome -->    
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
           rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
           crossorigin="anonymous"/>
 </head>
-<body class="bg-[#272727] min-h-screen">
+<body class="bg-[#272727] relative pb-[44rem] sm:pb-48">
     <jsp:include page="/WEB-INF/views/layout/header.jsp" />
     <div class="relative hidden sm:block z-0 h-56 md:h-72 lg:h-96 xl:h-[25rem] bg-center xl:bg-cover" style="background-image: url('${pageContext.request.contextPath}/resources/img/banner2.png')">
         <div class="absolute bottom-0 left-0 w-full h-16" style="background-image: linear-gradient(to top right, #272727 50%, transparent 50%);"></div>
@@ -74,13 +84,10 @@
         </div>
     </div>
         
-    <div class='flex flex-col items-center mt-8 lg:flex-row gap-16 mx-auto max-w-5xl relative text-[#8A8A8A] mb-auto'>
+    <div class='flex flex-col items-center mt-8 lg:flex-row gap-16 mx-auto max-w-5xl relative text-[#8A8A8A]'>
         <p class="">${game.getDescription()}</p>
     </div>
 
-    <div class='flex flex-col mt-auto'>
-        <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
-    </div>
-
+    <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
 </body>
 </html>

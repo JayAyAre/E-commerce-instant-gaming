@@ -24,6 +24,16 @@ public class Rental implements Serializable {
     private long customerId;
     private Collection<Game> rentedGames;
     private Customer tenant;
+    private Collection<RentalGameQuantity> rentalGameQuantities;
+
+    public Collection<RentalGameQuantity> getRentalGameQuantities() {
+        return rentalGameQuantities;
+    }
+
+    public void setRentalGameQuantities(Collection<RentalGameQuantity> rentalGameQuantities) {
+        this.rentalGameQuantities = rentalGameQuantities;
+    }
+    
         
     public String getId() {
         return id;
