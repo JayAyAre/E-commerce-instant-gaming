@@ -42,7 +42,7 @@
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
           crossorigin="anonymous"/>
 </head>
-<body class="bg-[#272727] relative pb-[44rem] sm:pb-48">
+<body class="bg-[#272727] relative pb-[44rem] md:pb-[26rem]">
     <jsp:include page="/WEB-INF/views/layout/header.jsp" />
     <div class="relative hidden sm:block z-0 h-56 md:h-72 lg:h-96 xl:h-[25rem] bg-center xl:bg-cover" style="background-image: url('${pageContext.request.contextPath}/resources/img/banner2.png')">
         <div class="absolute bottom-0 left-0 w-full h-16" style="background-image: linear-gradient(to top right, #272727 50%, transparent 50%);"></div>
@@ -51,8 +51,7 @@
         
     <div class="flex flex-col items-center sm:-mt-48 lg:flex-row gap-4 sm:gap-16 mx-[2rem] sm:mx-auto sm:max-w-5xl relative">
         <!-- Resto del contenido -->
-        <img class="rounded-lg sm:w-1/2" src="${pageContext.request.contextPath}/resources/img/${game.getImage()}.jpg" alt="Game image">
-      
+        <img class="rounded-lg sm:w-full sm:h-[22rem]" src="${pageContext.request.contextPath}/resources/img/${game.getImage()}.jpg" alt="Game image">
 
         <div class="w-full h-full sm:w-1/2 border border-0 rounded-lg p-10 text-white mt-4 sm:mt-0 sm:bg-transparent" style="backdrop-filter: blur(35px);">
             <div class="flex flex-col">
@@ -84,7 +83,7 @@
         </div>
     </div>
         
-    <div class='flex flex-col items-center mt-8 lg:flex-row gap-16 mx-auto max-w-5xl relative text-[#8A8A8A]'>
+    <div class='flex flex-col items-center mt-8 lg:flex-row gap-16 p-10 mx-auto max-w-5xl relative text-[#8A8A8A]'>
         <p class="">${game.getDescription()}</p>
     </div>
 
