@@ -23,22 +23,28 @@ public class Game implements Serializable {
     private String description;
     private float price;
     private Address address;
-
+    private int rentedCount;
     private Console console;
     private Long consoleId; 
     private Collection<GameType> types;
     private Collection<Long> typeIds;
     private Collection<Long> rentals;
-    
     private long image;
 
-    // Getter y Setter para el campo image
     public long getImage() {
         return image;
     }
 
     public void setImage(long image) {
         this.image = image; 
+    }
+    
+    public int getRentedCount() {
+        return rentedCount;
+    }
+
+    public void setRentedCount(int rentedCount) {
+        this.rentedCount = rentedCount;
     }
     
     public Collection<Long> getRentals() {

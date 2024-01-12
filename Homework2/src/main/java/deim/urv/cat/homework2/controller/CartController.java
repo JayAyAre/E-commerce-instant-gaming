@@ -37,7 +37,7 @@ public class CartController {
     @Inject Models models;
 
     @GET
-    public String viewCart(@Context HttpServletRequest request) {
+    public String viewCart(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
         
         HttpSession session = request.getSession(false);
         Collection<Console> consoles = consoleService.getAllConsoles();
@@ -53,11 +53,11 @@ public class CartController {
     }
 
     @POST
-    public String addToCart(@Context HttpServletRequest request) {
+    public String addToCart(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
         
         String gameId = request.getParameter("gameId");
         if(Long.parseLong(gameId) < 1){
-             return "error404.jsp";
+            response.sendRedirect(request.getContextPath() + "/Error404.jsp");
         }
      
         HttpSession session = request.getSession(false);
@@ -78,7 +78,7 @@ public class CartController {
     
     @GET
     @Path("{id}")
-    public void removeFromCart(@PathParam("id") Long id, @Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
+    public String removeFromCart(@PathParam("id") Long id, @Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
 
         HttpSession session = request.getSession(false);
         Cart cart = (Cart) session.getAttribute("cart");
@@ -94,6 +94,6 @@ public class CartController {
         Collection<Console> consoles = consoleService.getAllConsoles();
         models.put("consoles", consoles);
 
-        response.sendRedirect(request.getContextPath() + "/Web/cart");
+        return "game/cart.jsp";
     }
 }

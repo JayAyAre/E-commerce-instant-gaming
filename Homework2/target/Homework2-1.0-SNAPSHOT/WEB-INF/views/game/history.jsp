@@ -33,7 +33,7 @@
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
           crossorigin="anonymous"/>
 </head>
-<body class="bg-[#272727] min-h-screen flex flex-col flex-grow">
+<body class="bg-[#272727] relative pb-[44rem] sm:pb-48">
 
     <jsp:include page="/WEB-INF/views/layout/header.jsp" />
 
@@ -43,12 +43,13 @@
                 <h2 class="text-3xl font-semibold mb-4 text-white">Shopping Cart</h2>
                 <c:if test="${not empty rentals}">
                     <c:forEach var="rental" items="${rentals}">
-                        <c:forEach var="game" items="${rental}">
-                            <div class="border border-0 rounded-lg text-white bg-gray-dark" style="backdrop-filter: blur(35px);">
+                        <c:forEach var="game" items="${rental.rentedGames}">
+                            <div class="border border-0 pb-9 rounded-lg text-white bg-gray-dark" style="backdrop-filter: blur(35px);">
                                 <div class="flex flex-col sm:flex-row gap-8">
-                                    <img class="flex flex-col w-full sm:flex-row w-4/6 sm:w-3/6 object-cover object-center rounded-xl" src="${pageContext.request.contextPath}/resources/img/${item.id}.jpg" alt="Game image">
+                                    <img class="flex flex-col w-full sm:flex-row w-4/6 sm:w-3/6 object-cover object-center rounded-xl" src="${pageContext.request.contextPath}/resources/img/${game.id}.jpg" alt="Game image">
                                     <div class="flex flex-col w-full sm:flex-col">
                                         <h3 class="text-xl font-semibold ">${game.name}</h3>
+                                        <p class="text-base text-gray-300 mb-2">Count; ${game.rentedCount}</p>
                                         <p class="text-base text-gray-300 mb-2">Console: 
                                             <c:forEach var="console" items="${consoles}">
                                                 <c:if test="${game.consoleId eq console.id}">
@@ -61,9 +62,9 @@
                                 </div>
                             </div>
                         </c:forEach>
-                        <h2 class="text-xl font-semibold ">Total for rent:${rental.price}</h3>
-                        <h4 class="text-lg font-semibold ">Start date:${rental.startDate}</h3>
-                        <h4 class="text-lg font-semibold ">Finla date:${rental.finalDate}</h3>
+                        <h2 class="text-xl font-semibold ">Total for rent: ${rental.price}</h3>
+                        <h4 class="text-lg font-semibold ">Start date: ${rental.startDate}</h3>
+                        <h4 class="text-lg font-semibold ">Finla date: ${rental.finalDate}</h3>
                         <div class="w-full h-1 bg-[#474747] my-8 "></div>
                     </c:forEach>
                 </c:if>

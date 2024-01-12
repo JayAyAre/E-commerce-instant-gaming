@@ -53,10 +53,9 @@ public class RentalController {
         if(user== null || user.getClass() == null || user.getId()==null){
             response.sendRedirect(request.getContextPath() + "/Error404.jsp");
         }
-        Collection<Console> consoles = consoleService.getAllConsoles();
-        rentals = rentalService.findAllRental(String.valueOf(user.getId()),user);
-
         
+        Collection<Console> consoles = consoleService.getAllConsoles();
+        rentals = rentalService.findAllRental(String.valueOf(user.getId()),user);    
         models.put("consoles", consoles);
         models.put("rentals", rentals);
         return "game/history.jsp";
@@ -78,40 +77,33 @@ public class RentalController {
 
         User user = (User) session.getAttribute("authUser");
         
-        if(user== null || user.getClass() == null || user.getId()==null || cart==null){
+        if(user== null || user.getClass() == null || user.getId()==null){
             response.sendRedirect(request.getContextPath() + "/Error404.jsp");
             return;
         }
-        Cart newCart = new Cart();
-        session.setAttribute("cart", newCart);
         
+        Cart newCart = new Cart();
         Customer customer = new Customer();
+        Rental newRental = new Rental();
+        Date startDate = new Date();
+        
+        session.setAttribute("cart", newCart);
+   
         customer.setId(user.getId());
         customer.setEmail(user.getEmail());
         customer.setName(user.getUsername());
-
-        String total = request.getParameter("total");
  
         List<Long> gamesId = new ArrayList();
         for(Game game: games){
             gamesId.add(game.getId());
         }
-                
-        System.out.print(user);
-        System.out.print(customer);
-        System.out.print(gamesId);
-
-        Rental newRental = new Rental();
+         
         newRental.setCustomerId(customer.getId());
-        newRental.setPrice(Float.parseFloat(total));
         newRental.setGameId(gamesId);
-        Date startDate = new Date();
         newRental.setStartDate(startDate);
-       
         
+        System.out.println(newRental);
         rentalService.postRental(newRental, user);
-
- 
 
         response.sendRedirect(request.getContextPath() + "/Web/history");
     }   
