@@ -56,7 +56,7 @@
                         <c:forEach var="rentedGame" items="${rental.rentalGameQuantities}">
                             <div class="border border-0 pb-9 rounded-lg text-white bg-gray-dark" style="backdrop-filter: blur(35px);">
                                 <div class="flex flex-col sm:flex-row gap-8">
-                                    <img class="flex flex-col w-full sm:flex-row w-4/6 sm:w-3/6 object-cover object-center rounded-xl" src="${pageContext.request.contextPath}/resources/img/${rentedGame.game.id}.jpg" alt="Game image">
+                                    <img class="flex flex-col w-full sm:flex-row w-4/6 sm:w-3/6 object-cover object-center rounded-xl" src="${pageContext.request.contextPath}/resources/img/${rentedGame.game.image}.jpg" alt="Game image">
                                     <div class="flex flex-col w-full sm:flex-col">
                                         <h3 class="text-xl font-semibold ">${rentedGame.game.name}</h3>
                                         <p class="text-base text-gray-300 mb-2">Count: ${rentedGame.quantity}</p>

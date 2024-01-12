@@ -54,7 +54,7 @@
                     <c:forEach var="item" items="${sessionScope.cart.games}">
                         <div class="border border-0 rounded-lg text-white bg-gray-dark" style="backdrop-filter: blur(35px);">
                             <div class="flex flex-col sm:flex-row gap-8">
-                                <img class="flex flex-col w-full sm:flex-row w-4/6 sm:w-3/6 object-cover object-center rounded-xl" src="${pageContext.request.contextPath}/resources/img/${item.id}.jpg" alt="Game image">
+                                <img class="flex flex-col w-full sm:flex-row w-4/6 sm:w-3/6 object-cover object-center rounded-xl" src="${pageContext.request.contextPath}/resources/img/${item.image}.jpg" alt="Game image">
                                 <div class="flex flex-col w-full sm:flex-col">
                                     <h3 class="text-xl font-semibold ">${item.name}</h3>
                                     <p class="text-base text-gray-300 mt-2">Stock: ${item.stock}</p>
@@ -80,15 +80,17 @@
                     <p>Your cart is empty.</p>
                 </c:if>
             </div>      
-            <div class="sm:w-1/3 text-main-gray-medium">
-                <div class="border border-0 rounded-xl p-6 text-white bg-main-gray-light" style="backdrop-filter: blur(35px);">
-                    <h2 class="text-3xl font-semibold mb-4">Total: <fmt:formatNumber value="${total}" pattern="0.00"/>$</h2>
-                    <form action="/Homework2/Web/history" method="post">
-                        <input class="total" type="hidden" name="total" value="${total}">
-                        <button class="bg-gradient-to-r from-main-orange-light to-main-orange-dark text-white font-semibold py-2 px-4 border rounded border-0 shadow" type="submit">Proceed to rent</button>
-                    </form>   
+            <c:if test="${not empty sessionScope.cart.games}">
+                <div class="sm:w-1/3 text-main-gray-medium">
+                    <div class="border border-0 rounded-xl p-6 text-white bg-main-gray-light" style="backdrop-filter: blur(35px);">
+                        <h2 class="text-3xl font-semibold mb-4">Total: <fmt:formatNumber value="${total}" pattern="0.00"/>$</h2>
+                        <form action="/Homework2/Web/history" method="post">
+                            <input class="total" type="hidden" name="total" value="${total}">
+                            <button class="bg-gradient-to-r from-main-orange-light to-main-orange-dark text-white font-semibold py-2 px-4 border rounded border-0 shadow" type="submit">Proceed to rent</button>
+                        </form>   
+                    </div>
                 </div>
-            </div>
+            </c:if>
         </div>
     </div>
     <jsp:include page="/WEB-INF/views/layout/footer.jsp" />

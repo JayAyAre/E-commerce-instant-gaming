@@ -19,7 +19,7 @@
         <a href="${pageContext.request.contextPath}/Web/shop"><img class="w-24 h-24" src="${pageContext.request.contextPath}/resources/img/logo.png" alt="Logo de Garlic Games"></a>
             
         <div class="flex flex-row text-white items-center gap-6 text-3xl">
-            <i class="fa fa-shopping-cart gradient cursor-pointer" aria-hidden="true"></i>
+            <i class="fa fa-shopping-cart gradient cursor-pointer" onclick="location.href='/Homework2/Web/cart'" aria-hidden="true"></i>
 
             <c:choose>
                 <c:when test="${sessionScope.authUser != null}">
