@@ -11,7 +11,7 @@
 </style>
 <footer class="absolute bottom-0 w-full">
     <div class="w-full bg-main-black">
-        <div class="flex flex-col lg:flex-row gap-10 lg:gap-0 justify-between w-full w-2/3 mx-auto py-10  px-12 xl:px-48">
+        <div class="flex flex-col lg:flex-row gap-10 lg:gap-0 justify-between xl:w-full mx-auto py-10  px-12 2xl:px-48">
             <div class='flex flex-col lg:flex-row gap-4 items-center lg:gap-6'>
                 <i class="fa fa-fighter-jet gradient-text text-5xl" aria-hidden="true"></i>
                 <div class="flex flex-col gap-1 text-white justify-center text-center xl:text-start">

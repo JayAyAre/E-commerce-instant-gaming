@@ -70,8 +70,7 @@ public class SignInFormController {
             session.setAttribute("authUser", user);
             return "redirect:shop";
         }
-        log.log(Level.WARNING, "A user with this e-mail address {0} already exists.", userForm.getEmail());
-        models.put("message", "A user with this e-mail address already exists!");
+        models.put("message", "Wrong credentials!");
         return "signin-form.jsp";
     } 
 }

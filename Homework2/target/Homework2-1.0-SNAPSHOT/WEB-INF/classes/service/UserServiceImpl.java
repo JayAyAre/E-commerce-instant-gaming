@@ -2,10 +2,12 @@ package deim.urv.cat.homework2.service;
 
 import deim.urv.cat.homework2.model.User;
 import deim.urv.cat.homework2.controller.UserForm;
+import deim.urv.cat.homework2.controller.UserUpdateForm;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.client.Entity;
+import java.util.Base64;
 import utilities.SecurityUtil;
 
 public class UserServiceImpl implements UserService {
@@ -31,23 +33,22 @@ public class UserServiceImpl implements UserService {
     
     @Override
     public User validateUser(UserForm user){
-        System.out.println("Contraseña al validar"+user.getPassword());
-        Response response = webTarget.path("validate").request(MediaType.APPLICATION_JSON).post(
-        Entity.entity(
-            user, 
-            MediaType.APPLICATION_JSON
-        ), 
-        Response.class);
-        if (response.getStatus() == 200) {
-            return response.readEntity(User.class);
+        User foundUser = findUserByEmail(user.getEmail());
+
+        if (foundUser == null) {
+            return null;
         }
+        
+        if (SecurityUtil.validatePassword(user.getPassword(), foundUser.getPassword())) {
+            return foundUser;
+        }
+ 
         return null;
     }
 
     @Override
     public boolean addUser(UserForm user) {
         user.setPassword(SecurityUtil.hashPassword(user.getPassword()));
-        System.out.println("Contraseña al añadir"+user.getPassword());
         Response response = webTarget.request(MediaType.APPLICATION_JSON).post(
         Entity.entity(
             user, 
@@ -55,6 +56,23 @@ public class UserServiceImpl implements UserService {
         ), 
         Response.class);
      return response.getStatus() == 201;
+    }
+
+    @Override
+    public boolean updateUser(UserUpdateForm user, User authUser) {
+        System.out.println("Los gordos son personas");
+        String credentials = authUser.getUsername()+ ":" + authUser.getEmail();
+        String encodedCredentials = Base64.getEncoder().encodeToString(credentials.getBytes());
+        
+        user.setPassword(SecurityUtil.hashPassword(user.getPassword()));
+        Response response = webTarget.path(String.valueOf(authUser.getId())).request(MediaType.APPLICATION_JSON)
+            .header("Authorization", "Basic " + encodedCredentials)
+            .put(Entity.entity(
+            user, 
+            MediaType.APPLICATION_JSON
+        ), 
+        Response.class);
+        return response.getStatus() == 200;
     }
 
 }

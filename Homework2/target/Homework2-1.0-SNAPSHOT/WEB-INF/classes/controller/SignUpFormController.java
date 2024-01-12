@@ -76,7 +76,6 @@ public class SignUpFormController {
         user = service.findUserByEmail(userForm.getEmail());
         HttpSession session = request.getSession(true);
         session.setAttribute("authUser", user);
-        System.out.println(user);
      
         return "redirect:shop";
     } 
