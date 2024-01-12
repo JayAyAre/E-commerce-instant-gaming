@@ -65,11 +65,7 @@ public class RentalController {
     @POST
     public void newRental(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(false);
-        
-        if(session==null){
-            response.sendRedirect(request.getContextPath() + "/Error404.jsp");
-        }
-        
+            
         List<Game> games = new ArrayList<>();
         Cart cart = (Cart) session.getAttribute("cart");
         games = cart.getGames();

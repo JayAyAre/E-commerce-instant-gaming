@@ -19,5 +19,6 @@
     <filter-mapping>
         <filter-name>authFilter</filter-name>
         <url-pattern>/Web/profile</url-pattern>
+        <url-pattern>/Web/history</url-pattern>
     </filter-mapping>
 </web-app>
