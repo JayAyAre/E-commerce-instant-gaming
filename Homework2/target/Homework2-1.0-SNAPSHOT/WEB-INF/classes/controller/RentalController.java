@@ -53,10 +53,9 @@ public class RentalController {
         if(user== null || user.getClass() == null || user.getId()==null){
             response.sendRedirect(request.getContextPath() + "/Error404.jsp");
         }
-        Collection<Console> consoles = consoleService.getAllConsoles();
-        rentals = rentalService.findAllRental(String.valueOf(user.getId()),user);
-
         
+        Collection<Console> consoles = consoleService.getAllConsoles();
+        rentals = rentalService.findAllRental(String.valueOf(user.getId()),user);    
         models.put("consoles", consoles);
         models.put("rentals", rentals);
         return "game/history.jsp";
