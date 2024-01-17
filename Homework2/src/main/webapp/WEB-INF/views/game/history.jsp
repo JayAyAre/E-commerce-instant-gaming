@@ -60,13 +60,7 @@
                                     <div class="flex flex-col w-full sm:flex-col">
                                         <h3 class="text-xl font-semibold ">${rentedGame.game.name}</h3>
                                         <p class="text-base text-gray-300 mb-2">Count: ${rentedGame.quantity}</p>
-                                        <p class="text-base text-gray-300 mb-2">Console: 
-                                            <c:forEach var="console" items="${consoles}">
-                                                <c:if test="${rentedGame.game.consoleId eq console.id}">
-                                                    ${console.name}
-                                                </c:if>
-                                            </c:forEach>
-                                        </p>
+                                        <p class="text-base text-gray-300 mb-2">Console: ${rentedGame.game.console}</p>
                                         <p class="text-3xl font-bold mt-auto"><fmt:formatNumber value="${rentedGame.game.price}" pattern="0.00"/>$</p>    
                                     </div>
                                 </div>
