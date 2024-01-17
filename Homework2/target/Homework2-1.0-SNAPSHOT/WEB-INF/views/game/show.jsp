@@ -53,7 +53,7 @@
         <!-- Resto del contenido -->
         <img class="rounded-lg sm:w-full sm:h-[22rem]" src="${pageContext.request.contextPath}/resources/img/${game.getImage()}.jpg" alt="Game image">
 
-        <div class="w-full h-full sm:w-1/2 border border-0 rounded-lg p-10 text-white mt-4 sm:mt-0 sm:bg-transparent" style="backdrop-filter: blur(35px);">
+        <div class="w-full h-[22rem] sm:w-1/2 border border-0 rounded-lg p-10 text-white mt-4 sm:mt-0 sm:bg-transparent" style="backdrop-filter: blur(35px);">
             <div class="flex flex-col">
                 <h2 class="text-2xl font-semibold mb-4">${game.name}</h2>
                 <p class="mb-2">Stock: ${game.stock}</p>
