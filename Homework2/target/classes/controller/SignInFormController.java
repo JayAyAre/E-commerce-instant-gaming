@@ -68,7 +68,13 @@ public class SignInFormController {
             log.log(Level.INFO, "Redirecting to the success page.");
             HttpSession session = request.getSession(true);
             session.setAttribute("authUser", user);
-            return "redirect:shop";
+            
+            String prevUri = (String)session.getAttribute("prevUri");
+            String destinyUri = prevUri != null ? prevUri : "shop";
+            
+            session.removeAttribute("prevUri");
+            
+            return "redirect:/"+destinyUri;
         }
         models.put("message", "Wrong credentials!");
         return "signin-form.jsp";

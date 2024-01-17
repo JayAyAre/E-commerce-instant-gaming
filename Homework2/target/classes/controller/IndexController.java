@@ -47,8 +47,18 @@ public class IndexController {
         .anyMatch(console -> console.getId().equals(consoleId));
 
         if (!consoleParameter && consoleId!=null) {
-            System.out.println("Entro:");
             return removeConsoleParameter(gameTypeIds);
+        }
+        
+        int totalGameCount = gameService.countGames(consoleId, gameTypeIds);
+        int totalPages = (int) Math.ceil((double) totalGameCount / pageSize);
+        
+        if (page > totalPages) {
+            String params = consoleId != null && consoleId > 0 ? "&console=" + consoleId : "";
+            for (Long typeId : gameTypeIds) {
+                params = params + "&gameType=" + typeId;
+            }
+            return "redirect:/shop?page="+ totalPages + params;
         }
         
         boolean gameTypeParameter;
@@ -65,11 +75,7 @@ public class IndexController {
         models.put("games", games); 
         
         models.put("currentPage", page);
-        
-        // Obtener el conteo total de juegos
-        int totalGameCount = gameService.countGames(consoleId, gameTypeIds);
-        int totalPages = (int) Math.ceil((double) totalGameCount / pageSize);
-       
+               
         models.put("totalPages", totalPages);
 
         return "index.jsp";

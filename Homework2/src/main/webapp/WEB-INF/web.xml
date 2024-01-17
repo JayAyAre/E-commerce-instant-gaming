@@ -16,9 +16,18 @@
         <filter-name>authFilter</filter-name>
         <filter-class>deim.urv.cat.homework2.controller.AuthFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>authFilterSign</filter-name>
+        <filter-class>deim.urv.cat.homework2.controller.AuthFilterSign</filter-class>
+    </filter>
     <filter-mapping>
         <filter-name>authFilter</filter-name>
         <url-pattern>/Web/profile</url-pattern>
         <url-pattern>/Web/history</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>authFilterSign</filter-name>
+        <url-pattern>/Web/sign-in</url-pattern>
+        <url-pattern>/Web/sign-up</url-pattern>
     </filter-mapping>
 </web-app>

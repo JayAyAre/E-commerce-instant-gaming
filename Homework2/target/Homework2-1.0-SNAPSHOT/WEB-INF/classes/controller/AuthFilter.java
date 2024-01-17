@@ -14,6 +14,7 @@ import java.io.IOException;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -21,6 +22,7 @@ import java.io.IOException;
  * @author edgar
  */
 public class AuthFilter implements Filter{
+    public static final String APP_PATH = "http://localhost:8080/Homework2/Web/";
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -32,12 +34,14 @@ public class AuthFilter implements Filter{
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-        // Verifica si el usuario está logueado (puedes ajustar esta lógica según tus necesidades)
         if (httpRequest.getSession().getAttribute("authUser") == null) {
-            // Usuario no logueado, redirigir a la página de inicio de sesión
+            HttpSession session = httpRequest.getSession();
+            String prevUri = httpRequest.getHeader("Referer");
+            if (prevUri != null) {
+                session.setAttribute("prevUri", prevUri.replace(APP_PATH, ""));
+            }
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/Web/sign-in");
         } else {
-            // Usuario logueado, continuar con la solicitud
             chain.doFilter(request, response);
         }    
     }

@@ -65,36 +65,27 @@ public class RentalController {
     @POST
     public void newRental(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(false);
+        
+        System.out.println("La gorda de tu madre me la come");
             
         List<Game> games = new ArrayList<>();
         Cart cart = (Cart) session.getAttribute("cart");
         games = cart.getGames();
 
-
         User user = (User) session.getAttribute("authUser");
-        
-        if(user== null || user.getClass() == null || user.getId()==null){
-            response.sendRedirect(request.getContextPath() + "/Error404.jsp");
-            return;
-        }
-        
+
         Cart newCart = new Cart();
-        Customer customer = new Customer();
         Rental newRental = new Rental();
         Date startDate = new Date();
         
         session.setAttribute("cart", newCart);
-   
-        customer.setId(user.getId());
-        customer.setEmail(user.getEmail());
-        customer.setName(user.getUsername());
  
         List<Long> gamesId = new ArrayList();
         for(Game game: games){
             gamesId.add(game.getId());
         }
          
-        newRental.setCustomerId(customer.getId());
+        newRental.setCustomerId(user.getId());
         newRental.setGameId(gamesId);
         newRental.setStartDate(startDate);
         

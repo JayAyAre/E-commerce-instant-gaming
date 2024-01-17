@@ -60,7 +60,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updateUser(UserUpdateForm user, User authUser) {
-        System.out.println("Los gordos son personas");
         String credentials = authUser.getUsername()+ ":" + authUser.getEmail();
         String encodedCredentials = Base64.getEncoder().encodeToString(credentials.getBytes());
         
