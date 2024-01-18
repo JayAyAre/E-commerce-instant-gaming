@@ -25,6 +25,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import utilities.SecurityUtil;
 
 @Controller
 @Path("sign-up")
@@ -71,12 +72,17 @@ public class SignUpFormController {
         }
         log.log(Level.INFO, "Redirecting to the success page.");
         
-        service.addUser(userForm);
+        Boolean addedUser = service.addUser(userForm);
         
-        user = service.findUserByEmail(userForm.getEmail());
-        HttpSession session = request.getSession(true);
-        session.setAttribute("authUser", user);
-     
-        return "redirect:shop";
+        if (addedUser) {
+            user = service.findUserByEmail(userForm.getEmail());
+            HttpSession session = request.getSession(true);
+            session.setAttribute("authUser", user);
+
+            return "redirect:shop";
+        }else{
+            models.put("message", "There was an error creating a user, pleas contact our support at support@garlic.com");
+            return "signup-form.jsp";
+        }
     } 
 }
