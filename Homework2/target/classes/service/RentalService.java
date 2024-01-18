@@ -30,7 +30,7 @@ public class RentalService {
     }
     
     public Rental findRental(String id, User user){
-        String credentials = user.getUsername()+ ":" + user.getEmail();
+        String credentials = user.getEmail()+ ":" + user.getPassword();
         String encodedCredentials = Base64.getEncoder().encodeToString(credentials.getBytes());
         Response response = webTarget.path(id)
                 .request(MediaType.APPLICATION_JSON)
@@ -43,7 +43,7 @@ public class RentalService {
     }
 
     public ArrayList<Rental> findAllRental(String userId, User user){
-        String credentials = user.getUsername()+ ":" + user.getEmail();
+        String credentials = user.getEmail()+ ":" + user.getPassword();
         String encodedCredentials = Base64.getEncoder().encodeToString(credentials.getBytes());
         Response response = webTarget.queryParam("userId",userId)
                 .request(MediaType.APPLICATION_JSON)
@@ -58,7 +58,7 @@ public class RentalService {
     
 
     public Response postRental(Rental rental, User user) {
-        String credentials = user.getUsername()+ ":" + user.getEmail();
+        String credentials = user.getEmail()+ ":" + user.getPassword();
         String encodedCredentials = Base64.getEncoder().encodeToString(credentials.getBytes());
 
         Response response = webTarget.request(MediaType.APPLICATION_JSON)

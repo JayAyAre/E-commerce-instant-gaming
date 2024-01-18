@@ -4,7 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Sign Up</title>
+    <link rel="icon" href="${pageContext.request.contextPath}/resources/img/logo_icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/logo_icon.png" type="image/x-icon">
+    <link rel="icon" type="image/gif" href="/img/logo_icon.png">
+<title>Garlic Games - ${game.name}</title>
 <script src="https://cdn.tailwindcss.com/?plugins=forms"></script>
 <script>
     tailwind.config = {

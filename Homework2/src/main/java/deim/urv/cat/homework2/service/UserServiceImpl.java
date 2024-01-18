@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean addUser(UserForm user) {
+    public void addUser(UserForm user) {
         user.setPassword(SecurityUtil.hashPassword(user.getPassword()));
         Response response = webTarget.request(MediaType.APPLICATION_JSON).post(
         Entity.entity(
@@ -55,12 +55,11 @@ public class UserServiceImpl implements UserService {
             MediaType.APPLICATION_JSON
         ), 
         Response.class);
-     return response.getStatus() == 201;
     }
 
     @Override
     public boolean updateUser(UserUpdateForm user, User authUser) {
-        String credentials = authUser.getUsername()+ ":" + authUser.getEmail();
+        String credentials = authUser.getEmail()+ ":" + authUser.getPassword();
         String encodedCredentials = Base64.getEncoder().encodeToString(credentials.getBytes());
         
         user.setPassword(SecurityUtil.hashPassword(user.getPassword()));

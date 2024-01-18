@@ -72,15 +72,15 @@ public class SignUpFormController {
         }
         log.log(Level.INFO, "Redirecting to the success page.");
         
-        Boolean addedUser = service.addUser(userForm);
+        service.addUser(userForm);
         
-        if (addedUser) {
+        try{
             user = service.findUserByEmail(userForm.getEmail());
             HttpSession session = request.getSession(true);
             session.setAttribute("authUser", user);
 
             return "redirect:shop";
-        }else{
+        }catch(Exception e){
             models.put("message", "There was an error creating a user, pleas contact our support at support@garlic.com");
             return "signup-form.jsp";
         }

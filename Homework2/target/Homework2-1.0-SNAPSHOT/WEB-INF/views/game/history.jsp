@@ -6,7 +6,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Shopping cart</title>
+    <link rel="icon" href="${pageContext.request.contextPath}/resources/img/logo_icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/logo_icon.png" type="image/x-icon">
+    <link rel="icon" type="image/gif" href="/img/logo_icon.png">
+    <title>History</title>
     <script src="https://cdn.tailwindcss.com/?plugins=forms"></script>
     <script>
         tailwind.config = {
@@ -50,7 +53,7 @@
     <div class="flex flex-col lg:flex-row gap-4 sm:gap-16 mx-[2rem] sm:mx-auto sm:max-w-5xl relative z-1">
         <div class="flex flex-col sm:flex-row gap-4 mt-12">
             <div class="flex flex-col lg:w-auto text-main-gray-medium bg-main-gray-light p-6 rounded-2xl">
-                <h2 class="text-3xl font-semibold mb-4 text-white">Shopping Cart</h2>
+                <h2 class="text-3xl font-semibold mb-4 text-white">History</h2>
                <c:if test="${not empty rentals}">
                     <c:forEach var="rental" items="${rentals}">
                         <c:forEach var="rentedGame" items="${rental.rentalGameQuantities}">

@@ -12,7 +12,7 @@
           rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
           crossorigin="anonymous"/> 
-<title>Garlic Games - Los mejores juegos al mejor precio!</title>
+<title>Garlic Games - Edit profile</title>
 <script src="https://cdn.tailwindcss.com/?plugins=forms"></script>
 <script>
     tailwind.config = {
