@@ -63,16 +63,15 @@
                                     <div class="flex flex-col w-full sm:flex-col">
                                         <h3 class="text-xl font-semibold ">${rentedGame.game.name}</h3>
                                         <p class="text-base text-gray-300 mb-2">Count: ${rentedGame.quantity}</p>
-                                        <p class="text-base text-gray-300 mb-2">Console: ${rentedGame.game.console}</p>
+                                        <p class="text-base text-gray-300 mb-2">Console: ${rentedGame.game.console.name}</p>
                                         <p class="text-3xl font-bold mt-auto"><fmt:formatNumber value="${rentedGame.game.price}" pattern="0.00"/>$</p>    
                                     </div>
                                 </div>
                             </div>
                         </c:forEach>
                         <h2 class="text-3xl font-bold mt-auto text-white">Total for rent: <fmt:formatNumber value="${rental.price}" pattern="0.00"/>$</h3>
-                        <h4 class="text-lg font-semibold ">Start date: ${rental.startDate}</h3>
-                        <h4 class="text-lg font-semibold ">Final date: ${rental.finalDate}</h3>
-                        <div class="w-full h-1 bg-[#474747] my-8 "></div>
+                        <h4 class="text-lg font-semibold">Start date: <fmt:formatDate value="${rental.startDate}" pattern="EEEE d MMMM yyyy HH:mm"/></h4>
+                        <h4 class="text-lg font-semibold mb-8">Final date: <fmt:formatDate value="${rental.finalDate}" pattern="EEEE d MMMM yyyy HH:mm"/></h4>
                     </c:forEach>
                 </c:if>
                 <c:if test="${empty rentals}">
