@@ -17,9 +17,6 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Context;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-
-
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

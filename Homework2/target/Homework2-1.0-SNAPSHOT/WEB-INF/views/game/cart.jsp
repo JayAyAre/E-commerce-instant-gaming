@@ -46,7 +46,7 @@
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
           crossorigin="anonymous"/>
 </head>
-<body class=" relative bg-[#272727] pb-48">
+<body class="relative bg-[#272727] sm:pb-48">
     <jsp:include page="/WEB-INF/views/layout/header.jsp" />
     <div class="flex flex-col lg:flex-row gap-4 sm:gap-16 mx-[2rem] sm:mx-auto sm:max-w-5xl relative z-1">
         <div class="flex flex-col sm:flex-row gap-4 mt-12">
@@ -96,6 +96,7 @@
             </c:if>
         </div>
     </div>
-    <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
+    <div class="pt-[45rem] sm:pt-[35rem] lg:pt-[2rem]"> <jsp:include page="/WEB-INF/views/layout/footer.jsp" /></div>
+</div>
 </body>
 </html>

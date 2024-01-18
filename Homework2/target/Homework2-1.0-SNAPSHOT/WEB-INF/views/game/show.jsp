@@ -86,10 +86,10 @@
         </div>
     </div>
         
-    <div class='flex flex-col items-center mt-8 lg:flex-row gap-16 p-10 mx-auto max-w-5xl relative text-[#8A8A8A]'>
+    <div class='flex flex-col md:mb-[10rem]items-center mt-8 lg:flex-row gap-16 p-10 mx-auto max-w-5xl relative text-[#8A8A8A]'>
         <p class="">${game.getDescription()}</p>
     </div>
 
-    <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
+    <div class="pt-[30rem] sm:pt-[15rem] lg:pt-[2rem]"> <jsp:include page="/WEB-INF/views/layout/footer.jsp" /></div>
 </body>
 </html>

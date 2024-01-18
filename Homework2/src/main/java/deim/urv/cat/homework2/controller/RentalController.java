@@ -6,7 +6,6 @@ package deim.urv.cat.homework2.controller;
 
 import deim.urv.cat.homework2.model.Cart;
 import deim.urv.cat.homework2.model.Console;
-import deim.urv.cat.homework2.model.Customer;
 import deim.urv.cat.homework2.model.Game;
 import deim.urv.cat.homework2.model.Rental;
 import deim.urv.cat.homework2.model.User;
@@ -64,9 +63,7 @@ public class RentalController {
     @POST
     public void newRental(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(false);
-        
-        System.out.println("La gorda de tu madre me la come");
-            
+                    
         List<Game> games = new ArrayList<>();
         Cart cart = (Cart) session.getAttribute("cart");
         games = cart.getGames();

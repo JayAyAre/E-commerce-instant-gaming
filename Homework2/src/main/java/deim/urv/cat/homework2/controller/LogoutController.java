@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Context;
-
 import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;

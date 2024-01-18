@@ -81,6 +81,6 @@
         </div>
     </div>
 
-    <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
+    <div class="pt-[45rem] sm:pt-[35rem] lg:pt-[2rem]"> <jsp:include page="/WEB-INF/views/layout/footer.jsp" /></div>
 </body>
 </html>
