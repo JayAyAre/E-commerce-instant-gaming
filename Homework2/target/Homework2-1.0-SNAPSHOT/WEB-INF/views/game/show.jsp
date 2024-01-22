@@ -72,7 +72,7 @@
 
                 <c:choose>
                     <c:when test="${game.stock > 0}">              
-                        <form action="/Homework2/Web/cart" method="post">
+                        <form action="${mvc.uri('add-to-cart')}" method="post">
                             <input class="gameId" type="hidden" name="gameId" value="${game.id}">
                             <button class="bg-gradient-to-r from-main-orange-light to-main-orange-dark text-white font-semibold py-2 px-4 border rounded border-0 shadow" type="submit"> Add to cart </button>
                         </form>

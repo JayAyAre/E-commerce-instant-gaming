@@ -9,6 +9,7 @@ import deim.urv.cat.homework2.service.GameTypeService;
 import jakarta.inject.Inject;
 import jakarta.mvc.Controller;
 import jakarta.mvc.Models;
+import jakarta.mvc.UriRef;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -25,6 +26,7 @@ public class GameDetailsController {
 
     @GET
     @Path("{id}")
+    @UriRef("game-details")
     public String GameDetails(@PathParam("id") String id) {
         Game game = gameService.findGame(id);
         Collection<Console> consoles = consoleService.getAllConsoles();

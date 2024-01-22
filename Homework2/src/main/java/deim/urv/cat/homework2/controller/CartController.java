@@ -12,6 +12,7 @@ import deim.urv.cat.homework2.service.GameService;
 import jakarta.inject.Inject;
 import jakarta.mvc.Controller;
 import jakarta.mvc.Models;
+import jakarta.mvc.UriRef;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -37,6 +38,7 @@ public class CartController {
     @Inject Models models;
 
     @GET
+    @UriRef("view-cart")
     public String viewCart(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
         
         HttpSession session = request.getSession(false);
@@ -52,6 +54,7 @@ public class CartController {
     }
 
     @POST
+    @UriRef("add-to-cart")
     public String addToCart(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
         
         String gameId = request.getParameter("gameId");
@@ -72,11 +75,12 @@ public class CartController {
         
         Collection<Console> consoles = consoleService.getAllConsoles();
         models.put("consoles", consoles);
-        return "game/cart.jsp";
+        return "redirect:cart";
     }
     
     @GET
     @Path("{id}")
+    @UriRef("remove-from-cart")
     public String removeFromCart(@PathParam("id") Long id, @Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
 
         HttpSession session = request.getSession(false);

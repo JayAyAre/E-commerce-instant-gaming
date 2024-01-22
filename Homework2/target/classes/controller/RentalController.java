@@ -14,6 +14,7 @@ import deim.urv.cat.homework2.service.RentalService;
 import jakarta.inject.Inject;
 import jakarta.mvc.Controller;
 import jakarta.mvc.Models;
+import jakarta.mvc.UriRef;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -39,6 +40,7 @@ public class RentalController {
     @Inject Models models;
 
     @GET
+    @UriRef("view-history")
     public String showHistory(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
         ArrayList<Rental> rentals= new ArrayList();
         HttpSession session = request.getSession(false);
@@ -61,6 +63,7 @@ public class RentalController {
     
     
     @POST
+    @UriRef("new-rental")
     public void newRental(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(false);
                     

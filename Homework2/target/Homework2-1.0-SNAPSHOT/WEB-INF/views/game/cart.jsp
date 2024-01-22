@@ -87,7 +87,7 @@
                 <div class="sm:w-1/3 text-main-gray-medium">
                     <div class="border border-0 rounded-xl p-6 text-white bg-main-gray-light" style="backdrop-filter: blur(35px);">
                         <h2 class="text-3xl font-semibold mb-4">Total: <fmt:formatNumber value="${total}" pattern="0.00"/>$</h2>
-                        <form action="/Homework2/Web/history" method="post">
+                        <form action="${mvc.uri("new-rental")}" method="post">
                             <input class="total" type="hidden" name="total" value="${total}">
                             <button class="bg-gradient-to-r from-main-orange-light to-main-orange-dark text-white font-semibold py-2 px-4 border rounded border-0 shadow" type="submit">Proceed to rent</button>
                         </form>   
