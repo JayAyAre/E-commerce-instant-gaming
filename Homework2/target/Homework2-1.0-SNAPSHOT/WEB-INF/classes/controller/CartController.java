@@ -45,7 +45,6 @@ public class CartController {
         if (session != null) {
             Cart cart = (Cart) session.getAttribute("cart");
             if (cart != null) {
-                // Obtener y mostrar los elementos del carrito
                 session.setAttribute("cart", cart);
             }
         }

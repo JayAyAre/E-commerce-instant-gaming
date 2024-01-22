@@ -1,24 +1,19 @@
 package deim.urv.cat.homework2.controller;
 
-import deim.urv.cat.homework2.model.AlertMessage;
 import deim.urv.cat.homework2.model.Console;
 import deim.urv.cat.homework2.model.Game;
 import deim.urv.cat.homework2.model.GameType;
-import deim.urv.cat.homework2.model.SignUpAttempts;
 import deim.urv.cat.homework2.service.ConsoleService;
 import deim.urv.cat.homework2.service.GameService;
 import deim.urv.cat.homework2.service.GameTypeService;
-
 import jakarta.inject.Inject;
 import jakarta.mvc.Controller;
 import jakarta.mvc.Models;
-import jakarta.mvc.binding.BindingResult;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Controller
 @Path("game-details")

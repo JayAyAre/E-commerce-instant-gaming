@@ -1,16 +1,13 @@
 package deim.urv.cat.homework2.controller;
 
-import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
-import jakarta.mvc.RedirectScoped;
 import jakarta.mvc.binding.MvcBinding;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import jakarta.ws.rs.FormParam;
 import java.io.Serializable;
-import utilities.SecurityUtil;
 
 @Named("userForm")
 @SessionScoped

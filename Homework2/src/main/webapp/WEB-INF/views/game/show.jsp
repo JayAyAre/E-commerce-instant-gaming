@@ -55,7 +55,7 @@
     <div class="flex flex-col items-center sm:-mt-48 lg:flex-row gap-4 sm:gap-12 mx-[2rem] sm:mx-auto sm:max-w-5xl relative">
         <!-- Resto del contenido -->
         <img class="rounded-lg sm:w-full sm:h-[22rem]" src="${pageContext.request.contextPath}/resources/img/${game.getImage()}.jpg" alt="Game image">
-
+        
         <div class="w-full h-[22rem] sm:w-1/2 border border-0 rounded-lg p-10 text-white mt-4 sm:mt-0 sm:bg-transparent" style="backdrop-filter: blur(35px);">
             <div class="flex flex-col">
                 <h2 class="text-2xl font-semibold mb-4">${game.name}</h2>

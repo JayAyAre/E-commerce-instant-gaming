@@ -1,10 +1,8 @@
 package deim.urv.cat.homework2.controller;
 
 import deim.urv.cat.homework2.model.AlertMessage;
-import deim.urv.cat.homework2.model.SignUpAttempts;
 import deim.urv.cat.homework2.service.UserService;
 import deim.urv.cat.homework2.model.User;
-
 import jakarta.inject.Inject;
 import jakarta.mvc.Controller;
 import jakarta.mvc.Models;
@@ -20,9 +18,6 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Context;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-
-
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
