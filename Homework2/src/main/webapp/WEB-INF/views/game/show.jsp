@@ -47,14 +47,14 @@
 </head>
 <body class="bg-[#272727] relative pb-[44rem] md:pb-[26rem]">
     <jsp:include page="/WEB-INF/views/layout/header.jsp" />
-    <div class="relative hidden sm:block z-0 h-56 md:h-72 lg:h-96 xl:h-[24rem] bg-center xl:bg-cover" style="background-image: url('${pageContext.request.contextPath}/resources/img/banner.jpg')">
+    <div class="relative hidden sm:block z-0 h-[17rem] bg-center xl:bg-cover" style="background-image: url('${pageContext.request.contextPath}/resources/img/banner.jpg')">
         <div class="absolute bottom-0 left-0 w-full h-16" style="background-image: linear-gradient(to top right, #272727 50%, transparent 50%);"></div>
     </div>
 
         
     <div class="flex flex-col items-center sm:-mt-48 lg:flex-row gap-4 sm:gap-12 mx-[2rem] sm:mx-auto sm:max-w-5xl relative">
         <!-- Resto del contenido -->
-        <img class="rounded-lg sm:w-full sm:h-[22rem]" src="${pageContext.request.contextPath}/resources/img/${game.getImage()}.jpg" alt="Game image">
+        <img class="rounded-lg mt-12 sm:mt-0 sm:w-full sm:h-[22rem]" src="${pageContext.request.contextPath}/resources/img/${game.getImage()}.jpg" alt="Game image">
         
         <div class="w-full h-[22rem] sm:w-1/2 border border-0 rounded-lg p-10 text-white mt-4 sm:mt-0 sm:bg-transparent" style="backdrop-filter: blur(35px);">
             <div class="flex flex-col">

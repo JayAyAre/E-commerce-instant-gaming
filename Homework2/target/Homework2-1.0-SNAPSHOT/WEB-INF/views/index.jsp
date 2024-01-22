@@ -48,7 +48,7 @@
 </head>
 <body class="bg-main-gray-dark relative pb-[42rem] lg:pb-48">
     <jsp:include page="/WEB-INF/views/layout/header.jsp" />
-    <div class="relative hidden sm:block z-0 h-56 md:h-72 lg:h-96 xl:h-[24rem] bg-center xl:bg-cover" style="background-image: url('${pageContext.request.contextPath}/resources/img/banner.jpg')">
+    <div class="relative hidden sm:block z-0 h-[17rem] bg-center xl:bg-cover" style="background-image: url('${pageContext.request.contextPath}/resources/img/banner.jpg')">
         <div class="absolute bottom-0 left-0 w-full h-16" style="background-image: linear-gradient(to top right, #272727 50%, transparent 50%);"></div>
     </div>
         
