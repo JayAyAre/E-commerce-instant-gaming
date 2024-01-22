@@ -47,7 +47,7 @@
 </head>
 <body class="bg-[#272727] relative pb-[44rem] md:pb-[26rem]">
     <jsp:include page="/WEB-INF/views/layout/header.jsp" />
-    <div class="relative hidden sm:block z-0 h-56 md:h-72 lg:h-96 xl:h-[25rem] bg-center xl:bg-cover" style="background-image: url('${pageContext.request.contextPath}/resources/img/banner2.png')">
+    <div class="relative hidden sm:block z-0 h-56 md:h-72 lg:h-96 xl:h-[24rem] bg-center xl:bg-cover" style="background-image: url('${pageContext.request.contextPath}/resources/img/banner.jpg')">
         <div class="absolute bottom-0 left-0 w-full h-16" style="background-image: linear-gradient(to top right, #272727 50%, transparent 50%);"></div>
     </div>
 
@@ -61,6 +61,7 @@
                 <h2 class="text-2xl font-semibold mb-4">${game.name}</h2>
                 <p class="mb-2">Stock: ${game.stock}</p>
                 <p class="mb-2">Console: ${console.name}</p>
+                <p class="mb-2">${game.address}</p>
                 <div class="mb-4">
                     <h3 class="text-lg font-semibold mb-2">Genres:</h3>
                     <div class="flex flex-wrap">

@@ -42,11 +42,9 @@ public class Address implements Serializable {
     public void setZip(String zip) {
         this.zip = zip;
     }
+    
     @Override
     public String toString() {
-        return "Address street: " + getStreet() +
-               ", city: " + getCity() +
-               ", state: " + getState() +
-               ", zip: " + getZip();
+        return "Address street: " + getStreet() + ", " + getCity() + ", " + getState() + ", " + getZip();
     }
 }
