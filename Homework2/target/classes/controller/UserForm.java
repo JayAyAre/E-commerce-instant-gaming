@@ -20,7 +20,7 @@ public class UserForm implements Serializable {
     @Size(min=2, max=20, message = "Username must be between 2 and 20 characters")
     private String username;
 
-    @NotBlank
+    @NotBlank(message = "Email is required and cannot be empty")
     @FormParam("email")
     @Email(message = "Email should be valid")
     @MvcBinding

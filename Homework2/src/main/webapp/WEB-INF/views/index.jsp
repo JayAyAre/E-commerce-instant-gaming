@@ -165,7 +165,7 @@
             </div>
         </div>
     </div>
-    <div class="mx-auto px-8 2xl:w-2/3 w-full text-white mb-8">  
+    <div class="mx-auto px-8 2xl:w-[75%] w-full text-white mb-8">  
         <c:choose>
             <c:when test="${sessionScope.authUser != null}">
                 <h2 class="font-bold text-3xl my-8">Recomendations for ${sessionScope.authUser.username}</h2>
@@ -174,7 +174,7 @@
                  <h2 class="font-bold text-3xl my-8">Tendencies</h2>
             </c:otherwise>
         </c:choose> 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
             <c:forEach var="game" items="${games}">
                 <div>
                     <div onclick="location.href='game-details/${game.id}'" class="w-full h-[17.5rem] rounded-xl bg-cover bg-center hover:scale-105 transition transition-all cursor-pointer" style="background-image: url('${pageContext.request.contextPath}/resources/img/${game.image}.jpg')">
