@@ -74,7 +74,7 @@
                 Create an account
             </a>
         </div>
-        <div class="flex-1 w-full bg-cover bg-center" style="background-image: url('${pageContext.request.contextPath}/resources/img/registro.jpg')">
+        <div class="hidden md:flex flex-1 w-full bg-cover bg-center" style="background-image: url('${pageContext.request.contextPath}/resources/img/registro.jpg')">
         </div>
     </div>
     <!-- <jsp:include page="/WEB-INF/views/layout/footer.jsp" /> -->
